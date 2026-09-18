@@ -1,5 +1,7 @@
 node_modules
 dist
+dist-static
 .wrangler
 .env
 .DS_Store
+astro.config.static.mjs
