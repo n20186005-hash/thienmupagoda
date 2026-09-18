@@ -1,48 +1,94 @@
 ---
 import '../styles/global.css';
 const site = Astro.site;
-const canonical = site ? new URL(Astro.url.pathname, site).toString() : undefined;
-const ogImage = site ? new URL('/logo.svg', site).toString() : undefined;
-const attractionId = canonical ? `${canonical}#attraction` : '#attraction';
+const domain = 'thienmupagoda.com';
+const canonical = site ? new URL(Astro.url.pathname, site).toString() : `https://${domain}/`;
+const heroImage = 'https://upload.wikimedia.org/wikipedia/commons/6/65/Hue_Thien_Mu-Pagoda.JPG';
+const attractionId = `${canonical}#attraction`;
+
+const name = 'Chùa Thiên Mụ';
+const fullName = 'Thiên Mụ Pagoda';
+const shortName = 'Thien Mu Pagoda';
+const city = 'Huế';
+const region = 'Thừa Thiên Huế';
+const country = 'Vietnam';
+const countryCode = 'VN';
+const postal = '532761';
+const lat = 16.4536;
+const lng = 107.5446;
+const mapsUrl = 'https://maps.app.goo.gl/NY9gnNKVGTRhtfZF8';
+const mapsEmbed = 'https://www.google.com/maps?q=Ch%C3%B9a%20Thi%C3%AAn%20M%E1%BB%A5%2C%20Hu%E1%BA%BF%2C%20Vi%E1%BB%87t%20Nam&hl=vi&z=15&output=embed';
+const govtUrl = 'https://vietnam.travel/';
+const nearby1 = 'Imperial City of Huế';
+const nearby2 = 'Perfume River';
 const rating = { value: '4.6', count: '20197' };
-const place = {
-  name: 'Chùa Thiên Mụ',
-  alternateName: 'Thiên Mụ Pagoda',
-  address: 'Kim Long, Huế 532761, Việt Nam',
-  lat: 16.45463,
-  lng: 107.54455
-};
+
+// 评价仅展示在页面，不进入 JSON-LD；来源说明用于规避 Google 判违规风险
 const jsonLd = {
-  '@context':'https://schema.org','@type':['TouristAttraction','BuddhistTemple'], '@id':attractionId,
-  name:place.name, alternateName:place.alternateName,
-  description:'Cổ tự bên đồi Hà Khê, nổi bật với tháp Phước Duyên bảy tầng và tầm nhìn ra sông Hương.',
-  address:{'@type':'PostalAddress',streetAddress:'Kim Long',addressLocality:'Huế',postalCode:'532761',addressCountry:'VN'},
-  geo:{'@type':'GeoCoordinates',latitude:place.lat,longitude:place.lng},
-  isAccessibleForFree:true,
-  openingHoursSpecification:[{'@type':'OpeningHoursSpecification',dayOfWeek:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],opens:'08:00',closes:'18:00'}],
-  aggregateRating:{'@type':'AggregateRating',ratingValue:rating.value,reviewCount:rating.count,bestRating:'5',worstRating:'1'},
-  url: canonical
+  '@context': 'https://schema.org',
+  '@type': ['TouristAttraction', 'BuddhistTemple'],
+  '@id': attractionId,
+  name,
+  alternateName: [fullName, shortName, 'Thiên Mụ Temple', 'Linh Mụ Temple'],
+  description: 'Thiên Mụ Pagoda (Chùa Thiên Mụ) is a historic Buddhist temple on Hà Khê hill in Kim Long, Huế, Vietnam, best known for its seven-tier Phước Duyên Tower overlooking the Perfume River.',
+  url: canonical,
+  image: [heroImage],
+  isAccessibleForFree: true,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: name,
+    addressLocality: city,
+    addressRegion: region,
+    postalCode: postal,
+    addressCountry: countryCode
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: lat, longitude: lng },
+  hasMap: mapsUrl,
+  openingHoursSpecification: [{
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '08:00', closes: '18:00'
+  }],
+  sameAs: [mapsUrl, govtUrl]
 };
-const faqs=[
-  ['Chùa Thiên Mụ có thu vé không?','Không. Việc vào khuôn viên chùa được nhiều nguồn du lịch hiện hành ghi nhận là miễn phí; nên chuẩn bị chi phí riêng cho gửi xe, đi thuyền hoặc dịch vụ cá nhân.'],
-  ['Nên dành bao lâu để tham quan?','Khoảng 60–90 phút là phù hợp để đi chậm qua tháp Phước Duyên, cổng Tam Quan, điện Đại Hùng, khu vườn và bờ sông.'],
-  ['Nên mặc gì khi vào chùa?','Trang phục kín đáo, lịch sự; che vai và đầu gối, nói nhỏ và tuân theo hướng dẫn tại khu thờ tự.'],
-  ['Thời điểm nào đẹp nhất?','Buổi sáng mát và yên tĩnh; cuối chiều đẹp để nhìn sông Hương và ánh sáng nghiêng quanh tháp.'],
-  ['Có thể đến bằng thuyền không?','Có. Tuyến thuyền trên sông Hương là một cách phổ biến để tiếp cận chùa; lịch và giá thay đổi theo đơn vị khai thác.']
+
+const faqs = [
+  ['Chùa Thiên Mụ có thu vé không?', 'Không. Việc vào khuôn viên chùa được nhiều nguồn du lịch hiện hành ghi nhận là miễn phí; nên chuẩn bị chi phí riêng cho gửi xe, đi thuyền hoặc dịch vụ cá nhân.'],
+  ['Nên dành bao lâu để tham quan?', 'Khoảng 60–90 phút là phù hợp để đi chậm qua tháp Phước Duyên, cổng Tam Quan, điện Đại Hùng, khu vườn và bờ sông.'],
+  ['Nên mặc gì khi vào chùa?', 'Trang phục kín đáo, lịch sự; che vai và đầu gối, nói nhỏ và tuân theo hướng dẫn tại khu thờ tự.'],
+  ['Thời điểm nào đẹp nhất?', 'Buổi sáng mát và yên tĩnh; cuối chiều đẹp để nhìn sông Hương và ánh sáng nghiêng quanh tháp.'],
+  ['Có thể đến bằng thuyền không?', 'Có. Tuyến thuyền trên sông Hương là một cách phổ biến để tiếp cận chùa; lịch và giá thay đổi theo đơn vị khai thác.'],
+  ['Where is Thiên Mụ Pagoda located?', 'Thiên Mụ Pagoda is located in Kim Long, Huế, Thừa Thiên Huế province, Vietnam, on the northern bank of the Perfume River.'],
+  ['Is Thiên Mụ Pagoda free to visit?', 'Yes, entry to the temple grounds is free. Separate costs may apply for parking, boat trips on the Perfume River, or personal services.'],
+  ['What are the opening hours?', 'The grounds are generally open during daylight hours, roughly 08:00–18:00; hours may vary with religious events and on-site management.']
 ];
-const faqLd={'@context':'https://schema.org','@type':'FAQPage',mainEntity:faqs.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))};
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
+};
 ---
 <!doctype html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" />
-  <title>Chùa Thiên Mụ Huế — Cổ tự bên dòng Hương Giang</title>
-  <meta name="description" content="Cẩm nang tham quan Chùa Thiên Mụ ở Huế: lịch sử, tháp Phước Duyên, chi phí, giao thông, đỗ xe, ẩm thực và điểm tham quan lân cận." />
-  {canonical && <link rel="canonical" href={canonical} />}
-  <meta property="og:type" content="website"/><meta property="og:title" content="Chùa Thiên Mụ Huế"/><meta property="og:description" content="Cổ tự trên đồi Hà Khê, nhìn ra sông Hương."/>
-  {canonical && <meta property="og:url" content={canonical}/>} {ogImage && <meta property="og:image" content={ogImage}/>} 
-  <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml"/><link rel="icon" href="/icons/favicon-32.png" sizes="32x32"/><link rel="icon" href="/icons/favicon-16.png" sizes="16x16"/><link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" sizes="180x180"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thiên Mụ Pagoda (Chùa Thiên Mụ) — Huế | Visitor Guide & Location</title>
+  <meta name="description" content="Discover Thiên Mụ Pagoda, the iconic Buddhist temple in Huế, Thừa Thiên Huế, Vietnam. View the location map, opening hours, nearby Imperial City of Huế and Perfume River, and travel tips." />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Thiên Mụ Pagoda - Huế Travel Guide" />
+  <meta property="og:description" content="Official visitor guide to Thiên Mụ Pagoda in Huế, Thừa Thiên Huế, Vietnam." />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={heroImage} />
+  <meta property="og:image:alt" content="Thiên Mụ Pagoda in Huế, Vietnam" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#294d3a" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" />
+  <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" sizes="180x180" />
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
   <script type="application/ld+json" set:html={JSON.stringify(faqLd)}></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP"></script>
@@ -50,33 +96,89 @@ const faqLd={'@context':'https://schema.org','@type':'FAQPage',mainEntity:faqs.m
 </head>
 <body>
   <header class="sticky top-0 z-50 border-b border-black/10 bg-[#f5efe2]/92 backdrop-blur-xl">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3"><a href="#top"><img src="/logo.svg" width="220" height="64" alt="Chùa Thiên Mụ" class="h-12 w-auto"/></a><nav class="hidden gap-6 md:flex"><a class="navlink" href="#tham-quan">Tham quan</a><a class="navlink" href="#di-chuyen">Di chuyển</a><a class="navlink" href="#am-thuc">Ẩm thực</a><a class="navlink" href="#faq">FAQ</a></nav></div>
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3"><a href="#top"><img src="/logo.svg" width="220" height="64" alt="Chùa Thiên Mụ" class="h-12 w-auto" /></a><nav class="hidden gap-6 md:flex"><a class="navlink" href="#about">Giới thiệu</a><a class="navlink" href="#tham-quan">Tham quan</a><a class="navlink" href="#di-chuyen">Di chuyển</a><a class="navlink" href="#reviews">Đánh giá</a><a class="navlink" href="#faq">FAQ</a></nav></div>
   </header>
 
   <main id="top">
     <section class="hero-photo relative min-h-[78vh] text-white">
       <div class="absolute inset-0 pattern opacity-20"></div><div class="relative mx-auto flex min-h-[78vh] max-w-7xl items-end px-5 pb-14 pt-28">
-        <div class="max-w-3xl"><p class="kicker !text-[#f4d7a5]">Kim Long · Huế · Việt Nam</p><h1 class="mt-4 text-5xl leading-[.98] font-semibold md:text-8xl">Chùa Thiên Mụ</h1><p class="mt-5 max-w-2xl text-lg text-white/86 md:text-2xl">Một nhịp tĩnh lặng trên đồi Hà Khê — nơi tháp Phước Duyên bảy tầng soi bóng xuống dòng Hương Giang.</p><div class="mt-8 flex flex-wrap gap-3 text-sm font-semibold"><span class="rounded-full bg-white/14 px-4 py-2 backdrop-blur">★ 4,6 · 20.197 đánh giá</span><span class="rounded-full bg-white/14 px-4 py-2 backdrop-blur">Vào cửa miễn phí</span><span class="rounded-full bg-white/14 px-4 py-2 backdrop-blur">Di sản trong Quần thể Di tích Cố đô Huế</span></div></div>
+        <div class="max-w-3xl"><p class="kicker !text-[#f4d7a5]">Kim Long · Huế · Việt Nam</p><h1 class="mt-4 text-5xl leading-[.98] font-semibold md:text-8xl">Chùa Thiên Mụ</h1><p class="mt-5 max-w-2xl text-lg text-white/86 md:text-2xl">Một nhịp tĩnh lặng trên đồi Hà Khê — nơi tháp Phước Duyên bảy tầng soi bóng xuống dòng Hương Giang.</p><div class="mt-8 flex flex-wrap gap-3 text-sm font-semibold"><span class="rounded-full bg-white/14 px-4 py-2 backdrop-blur">★ 4,6 · 20.197 đánh giá</span><span class="rounded-full bg-white/14 px-4 py-2 backdrop-blur">Vào cửa miễn phí</span><span class="rounded-full bg-white/14 px-4 py-2 backdrop-blur">Di sản trong Quần thể Di tích Cố đô Huế</span></div><p class="mt-4 text-xs text-white/70"><a class="underline" href={mapsUrl} target="_blank" rel="noopener noreferrer">Đánh giá &amp; số lượt đánh giá đồng bộ từ đánh giá người dùng Google Maps · tháng 9/2026 · Xem tất cả trên Google Maps ↗</a></p></div>
       </div>
     </section>
 
     <section class="mx-auto max-w-7xl px-5 py-16 md:py-24"><div class="grid gap-8 md:grid-cols-[1.2fr_.8fr]"><div><p class="kicker">Cốt cách xứ Huế</p><h2 class="mt-3 text-4xl md:text-6xl">Từ năm 1601 đến biểu tượng Phước Duyên</h2><p class="mt-6 max-w-3xl text-lg leading-8 text-black/70">Chùa được khởi dựng dưới thời chúa Nguyễn Hoàng. UNESCO ghi nhận Thiên Mụ là một thành phần của Quần thể Di tích Cố đô Huế; tháp Phước Duyên bảy tầng được xây dưới triều Thiệu Trị vào thế kỷ XIX. Không gian chùa kéo dài từ bờ sông lên các lớp sân, cổng, điện thờ và vườn cây — một trục tham quan nên đi thật chậm.</p></div><div class="card rounded-[2rem] p-7"><p class="kicker">Thông tin nhanh</p><dl class="mt-5 space-y-4 text-sm"><div class="flex justify-between gap-4 border-b border-black/10 pb-3"><dt>Địa chỉ</dt><dd class="text-right font-semibold">Kim Long, Huế 532761</dd></div><div class="flex justify-between gap-4 border-b border-black/10 pb-3"><dt>Giờ tham khảo</dt><dd class="font-semibold">08:00–18:00</dd></div><div class="flex justify-between gap-4 border-b border-black/10 pb-3"><dt>Chi phí vào cửa</dt><dd class="font-semibold">Miễn phí</dd></div><div class="flex justify-between gap-4"><dt>Plus Code</dt><dd class="font-semibold">FG3V+7W Kim Long</dd></div></dl></div></div></section>
 
+    <section id="about" class="bg-[#f3ead8] border-y border-black/10">
+      <div class="mx-auto max-w-7xl px-5 py-16 md:py-24"><div class="grid gap-8 md:grid-cols-[1.2fr_.8fr]">
+        <div>
+          <p class="kicker">Visitor Guide</p>
+          <h2 class="mt-3 text-4xl md:text-6xl">About Thiên Mụ Pagoda</h2>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-black/70">Welcome to <strong>Chùa Thiên Mụ</strong>, widely recognized as the central <strong>Thien Mu Pagoda</strong>. Located in the heart of <strong>Huế</strong>, <strong>Thừa Thiên Huế</strong>, <strong>Vietnam</strong>, this destination serves as a primary hub for travelers visiting the region and the Perfume River.</p>
+          <p class="mt-4 text-sm font-semibold tracking-wide text-black/55">Chùa Thiên Mụ → Huế → Thừa Thiên Huế → Vietnam</p>
+          <p class="mt-4 max-w-3xl text-black/65">When visiting <strong>Chùa Thiên Mụ</strong>, visitors can easily explore surrounding historical landmarks and points of interest, including the <strong>Imperial City of Huế</strong> and the <strong>Perfume River</strong>.</p>
+        </div>
+        <div class="card rounded-[2rem] p-7">
+          <p class="kicker">Quick facts</p>
+          <dl class="mt-5 space-y-4 text-sm">
+            <div class="flex justify-between gap-4 border-b border-black/10 pb-3"><dt>Attraction</dt><dd class="text-right font-semibold">Thien Mu Pagoda</dd></div>
+            <div class="flex justify-between gap-4 border-b border-black/10 pb-3"><dt>City</dt><dd class="text-right font-semibold">Huế</dd></div>
+            <div class="flex justify-between gap-4 border-b border-black/10 pb-3"><dt>Province</dt><dd class="text-right font-semibold">Thừa Thiên Huế</dd></div>
+            <div class="flex justify-between gap-4"><dt>Country</dt><dd class="text-right font-semibold">Vietnam</dd></div>
+          </dl>
+          <p class="mt-5 text-xs text-black/50">For official regional tourism information, visit the <a class="underline" href={govtUrl} target="_blank" rel="noopener noreferrer">Vietnam National Authority of Tourism ↗</a>.</p>
+        </div>
+      </div></div>
+    </section>
+
     <section class="grid min-h-[560px] md:grid-cols-2"><div class="photo-a min-h-[420px]" role="img" aria-label="Chùa Thiên Mụ, Huế"></div><div class="bg-[#294d3a] p-8 text-[#f6f0e3] md:p-16"><p class="kicker !text-[#d6b47a]">Một vòng tham quan</p><h2 class="mt-3 text-4xl md:text-5xl">Những lớp không gian đáng dừng lại</h2><div class="mt-8 grid gap-5"><article><h3 class="text-xl font-semibold">01 · Tháp Phước Duyên</h3><p class="mt-2 text-white/70">Biểu tượng nổi bật nhất của chùa, bảy tầng, dựng dưới triều Thiệu Trị.</p></article><article><h3 class="text-xl font-semibold">02 · Cổng Tam Quan & Điện Đại Hùng</h3><p class="mt-2 text-white/70">Trục nghi lễ chính; hãy giữ giọng nói nhỏ và quan sát quy định trước khi vào nội điện.</p></article><article><h3 class="text-xl font-semibold">03 · Vườn chùa & sông Hương</h3><p class="mt-2 text-white/70">Khoảng lặng sau các công trình chính, hợp để nghỉ chân trước khi xuống bến sông.</p></article></div></div></section>
 
     <section id="tham-quan" class="mx-auto max-w-7xl px-5 py-16 md:py-24"><div class="grid gap-6 md:grid-cols-3"><article class="card rounded-3xl p-7"><p class="kicker">Vé / chi phí</p><h3 class="mt-3 text-2xl font-semibold">Miễn phí tham quan</h3><p class="mt-3 leading-7 text-black/65">Không thu vé vào khuôn viên theo các nguồn du lịch cập nhật. Các khoản như gửi xe, thuyền sông Hương, đồ lễ hoặc hướng dẫn viên là chi phí riêng và có thể thay đổi.</p></article><article class="card rounded-3xl p-7"><p class="kicker">Thời điểm</p><h3 class="mt-3 text-2xl font-semibold">Sáng sớm hoặc cuối chiều</h3><p class="mt-3 leading-7 text-black/65">Mùa xuân Huế thường dễ chịu nhất. Sáng cho không khí tĩnh, chiều có ánh sáng đẹp bên sông; mùa mưa kéo dài nên nên xem dự báo trước khi đi.</p></article><article class="card rounded-3xl p-7"><p class="kicker">Thời lượng</p><h3 class="mt-3 text-2xl font-semibold">Khoảng 60–90 phút</h3><p class="mt-3 leading-7 text-black/65">Đủ để đi trọn tuyến chính mà không vội. Nếu kết hợp đi thuyền, chụp ảnh hoặc dự lễ, nên chừa thêm thời gian.</p></article></div></section>
 
-    <section id="di-chuyen" class="bg-[#7f2f2a] text-[#fff6e8]"><div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 md:grid-cols-2 md:py-24"><div><p class="kicker !text-[#f2cf91]">Chi tiết giao thông</p><h2 class="mt-3 text-4xl md:text-5xl">Đi theo bờ sông, hoặc đến bằng thuyền</h2><div class="mt-7 space-y-5 text-white/78"><p><b class="text-white">Xe máy / ô tô:</b> từ trung tâm Huế đi theo hướng Kim Long – Nguyễn Phúc Nguyên. Đường dễ đi, quãng đường khoảng vài kilomet tùy điểm xuất phát.</p><p><b class="text-white">Xe đạp:</b> phù hợp nếu thời tiết mát; cung đường ven sông cho nhịp đi chậm.</p><p><b class="text-white">Thuyền rồng:</b> có các chuyến trên sông Hương kết nối khu trung tâm và bến gần chùa; nên hỏi giờ chạy và giá tại ngày đi.</p><p><b class="text-white">Taxi / xe công nghệ:</b> thuận tiện cho nhóm nhỏ và khi trời mưa.</p></div></div><div class="overflow-hidden rounded-[2rem] bg-white/10 p-2"><iframe title="Bản đồ Chùa Thiên Mụ" class="h-[430px] w-full rounded-[1.6rem] border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Ch%C3%B9a%20Thi%C3%AAn%20M%E1%BB%A5%2C%20Hu%E1%BA%BF%2C%20Vi%E1%BB%87t%20Nam&hl=vi&z=15&output=embed"></iframe></div></div></section>
+    <section id="di-chuyen" class="bg-[#7f2f2a] text-[#fff6e8]"><div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 md:grid-cols-2 md:py-24"><div><p class="kicker !text-[#f2cf91]">Chi tiết giao thông</p><h2 class="mt-3 text-4xl md:text-5xl">Đi theo bờ sông, hoặc đến bằng thuyền</h2><div class="mt-7 space-y-5 text-white/78"><p><b class="text-white">Xe máy / ô tô:</b> từ trung tâm Huế đi theo hướng Kim Long – Nguyễn Phúc Nguyên. Đường dễ đi, quãng đường khoảng vài kilomet tùy điểm xuất phát.</p><p><b class="text-white">Xe đạp:</b> phù hợp nếu thời tiết mát; cung đường ven sông cho nhịp đi chậm.</p><p><b class="text-white">Thuyền rồng:</b> có các chuyến trên sông Hương kết nối khu trung tâm và bến gần chùa; nên hỏi giờ chạy và giá tại ngày đi.</p><p><b class="text-white">Taxi / xe công nghệ:</b> thuận tiện cho nhóm nhỏ và khi trời mưa.</p></div></div><div class="overflow-hidden rounded-[2rem] bg-white/10 p-2"><iframe title="Bản đồ Chùa Thiên Mụ" class="h-[430px] w-full rounded-[1.6rem] border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src={mapsEmbed}></iframe></div></div></section>
 
     <section class="mx-auto max-w-7xl px-5 py-16 md:py-24"><div class="grid gap-6 md:grid-cols-2"><article class="card rounded-3xl p-7"><p class="kicker">Đỗ xe</p><h2 class="mt-3 text-3xl">Gửi xe quanh lối vào</h2><p class="mt-4 leading-7 text-black/65">Khu vực gần chùa có các điểm trông xe phục vụ khách. Mức phí có thể thay đổi theo loại xe và thời điểm; hãy xem bảng giá niêm yết tại chỗ trước khi gửi. Tránh đỗ chắn lối dân sinh và bến thuyền.</p></article><article class="card rounded-3xl p-7"><p class="kicker">Ứng xử tại nơi thờ tự</p><h2 class="mt-3 text-3xl">Kín đáo, nhẹ tiếng, tôn trọng nghi lễ</h2><p class="mt-4 leading-7 text-black/65">Che vai và đầu gối, không tạo dáng phản cảm trước điện thờ, hạn chế dùng flash và làm theo biển hướng dẫn. Khi có khóa lễ, ưu tiên không gian cho Phật tử.</p></article></div></section>
 
     <section id="am-thuc" class="pattern border-y border-black/10"><div class="mx-auto max-w-7xl px-5 py-16 md:py-24"><p class="kicker">Quanh Kim Long</p><h2 class="mt-3 text-4xl md:text-5xl">Ẩm thực nên tìm sau khi vãn cảnh</h2><div class="mt-8 grid gap-5 md:grid-cols-4"><div class="card rounded-3xl p-6"><h3 class="text-xl font-semibold">Bún bò Huế</h3><p class="mt-2 text-sm leading-6 text-black/60">Nước dùng đậm, sả thơm; hợp cho bữa sáng hoặc trưa.</p></div><div class="card rounded-3xl p-6"><h3 class="text-xl font-semibold">Bánh bèo · nậm · lọc</h3><p class="mt-2 text-sm leading-6 text-black/60">Nhóm bánh nhỏ đặc trưng Huế, dễ gọi nhiều món để chia sẻ.</p></div><div class="card rounded-3xl p-6"><h3 class="text-xl font-semibold">Cơm chay</h3><p class="mt-2 text-sm leading-6 text-black/60">Phù hợp tinh thần chuyến viếng chùa; Huế có truyền thống ẩm thực chay phong phú.</p></div><div class="card rounded-3xl p-6"><h3 class="text-xl font-semibold">Chè Huế</h3><p class="mt-2 text-sm leading-6 text-black/60">Một kết thúc nhẹ nhàng sau buổi đi bộ trong khuôn viên chùa.</p></div></div></div></section>
 
-    <section class="mx-auto max-w-7xl px-5 py-16 md:py-24"><div class="grid gap-10 md:grid-cols-[.9fr_1.1fr]"><div class="photo-b min-h-[430px] rounded-[2rem]" role="img" aria-label="Không gian thờ tự Chùa Thiên Mụ"></div><div><p class="kicker">Điểm lân cận</p><h2 class="mt-3 text-4xl md:text-5xl">Ghép thành một ngày rất “Huế”</h2><div class="mt-7 space-y-4"><div class="border-b border-black/10 pb-4"><h3 class="text-xl font-semibold">Kinh thành Huế</h3><p class="mt-1 text-black/60">Trung tâm di sản triều Nguyễn, dễ kết hợp trước hoặc sau Thiên Mụ.</p></div><div class="border-b border-black/10 pb-4"><h3 class="text-xl font-semibold">Văn Miếu Huế</h3><p class="mt-1 text-black/60">Nằm cùng hành lang di sản phía tây bắc, gần tuyến ven sông.</p></div><div class="border-b border-black/10 pb-4"><h3 class="text-xl font-semibold">Hổ Quyền – Điện Voi Ré</h3><p class="mt-1 text-black/60">Một cụm di tích ít ồn hơn, giúp hiểu thêm nghi lễ và lịch sử triều Nguyễn.</p></div><div><h3 class="text-xl font-semibold">Lăng Tự Đức</h3><p class="mt-1 text-black/60">Không gian lăng tẩm nổi tiếng phía tây nam thành phố; nên dành thời gian riêng để tham quan chậm.</p></div></div></div></div></section>
+    <section class="mx-auto max-w-7xl px-5 py-16 md:py-24"><div class="grid gap-10 md:grid-cols-[.9fr_1.1fr]"><div class="photo-b min-h-[430px] rounded-[2rem]" role="img" aria-label="Không gian thờ tự Chùa Thiên Mụ"></div><div><p class="kicker">Điểm lân cận</p><h2 class="mt-3 text-4xl md:text-5xl">Ghép thành một ngày rất “Huế”</h2><div class="mt-7 space-y-4"><div class="border-b border-black/10 pb-4"><h3 class="text-xl font-semibold">Kinh thành Huế</h3><p class="mt-1 text-black/60">Trung tâm di sản triều Nguyễn, dễ kết hợp trước hoặc sau Thiên Mụ.</p></div><div class="border-b border-black/10 pb-4"><h3 class="text-xl font-semibold">Văn Miếu Huế</h3><p class="mt-1 text-black/60">Nằm cùng hành lang di sản phía tây bắc, gần tuyến ven sông.</p></div><div class="border-b border-black/10 pb-4"><h3 class="text-xl font-semibold">Hổ Quyền – Điện Voi Ré</h3><p class="mt-1 text-black/60">Một cụm di tích ít ồn hơn, giúp hiểu thêm nghi lễ và lịch sử triều Nguyễn.</p></div><div><h3 class="text-xl font-semibold">Lăng Tự Đức</h3><p class="mt-1 text-black/60">Không gian lăng tẩm nổi tiếng phía tây nam thành phố; nên dành thời gian riêng để tham quan chậm.</p></div></div><p class="mt-6 text-black/55">Nearby highlights for an English-speaking itinerary include the <strong>Imperial City of Huế</strong> and a cruise on the <strong>Perfume River</strong>.</p></div></div></section>
+
+    <section id="reviews" class="bg-[#f3ead8] border-y border-black/10">
+      <div class="mx-auto max-w-7xl px-5 py-16 md:py-24">
+        <div class="card rounded-[2rem] p-8 md:p-10">
+          <p class="kicker">Đánh giá từ Google Maps</p>
+          <div class="mt-4 flex flex-wrap items-center gap-5">
+            <span class="text-5xl font-semibold text-[#b78a43]">★ 4,6</span>
+            <div>
+              <p class="text-lg font-semibold">4,6 / 5 · 20.197 đánh giá</p>
+              <p class="mt-1 max-w-2xl text-sm text-black/55">Đồng bộ từ đánh giá người dùng Google Maps, thời gian đồng bộ: tháng 9/2026. Bản quyền thuộc về tác giả gốc và Google Maps.</p>
+            </div>
+          </div>
+          <a class="mt-6 inline-block rounded-full bg-[#294d3a] px-6 py-3 text-sm font-semibold text-white" href={mapsUrl} target="_blank" rel="noopener noreferrer">Xem tất cả đánh giá trên Google Maps ↗</a>
+        </div>
+      </div>
+    </section>
 
     <section id="faq" class="bg-[#25392e] text-[#f7f0e4]"><div class="mx-auto max-w-4xl px-5 py-16 md:py-24"><p class="kicker !text-[#d7b477]">FAQ</p><h2 class="mt-3 text-4xl md:text-5xl">Câu hỏi thường gặp</h2><div class="mt-8 divide-y divide-white/15">{faqs.map(([q,a])=><details class="py-5 group"><summary class="cursor-pointer list-none text-xl font-semibold">{q}<span class="float-right text-white/50 group-open:rotate-45">＋</span></summary><p class="mt-3 max-w-3xl leading-7 text-white/65">{a}</p></details>)}</div></div></section>
+
+    <section id="sources" class="mx-auto max-w-7xl px-5 py-16 md:py-20">
+      <p class="kicker">Nguồn tham khảo</p>
+      <h2 class="mt-3 text-3xl md:text-4xl">Đánh giá &amp; tài liệu tham khảo</h2>
+      <ul class="mt-6 space-y-3 text-sm text-black/70">
+        <li>Đánh giá · đồng bộ tháng 9/2026 — nguồn: đánh giá người dùng Google Maps (Google Maps). Bản quyền thuộc về tác giả gốc và Google Maps.</li>
+        <li>Google Maps: <a class="underline" href={mapsUrl} target="_blank" rel="noopener noreferrer">Xem Chùa Thiên Mụ trên Google Maps ↗</a></li>
+        <li>Du lịch chính thức: <a class="underline" href={govtUrl} target="_blank" rel="noopener noreferrer">Vietnam National Authority of Tourism ↗</a></li>
+      </ul>
+    </section>
   </main>
 
-  <footer class="bg-[#16231c] text-white/65"><div class="mx-auto max-w-7xl px-5 py-10 text-sm"><div class="flex flex-col justify-between gap-5 md:flex-row"><p>Chùa Thiên Mụ · Kim Long, Huế</p><p class="max-w-xl md:text-right">Trang thông tin độc lập dành cho khách tham quan; không phải website chính thức của Chùa Thiên Mụ hay cơ quan quản lý di sản.</p></div><p class="mt-6 text-xs text-white/40">Ảnh tham khảo: Wikimedia Commons (Dominik Tefert, Clay Gilliland, Arabsalam). Thông tin giờ mở cửa và chi phí có thể thay đổi theo hoạt động tôn giáo và quản lý thực tế.</p></div></footer>
+  <footer class="bg-[#16231c] text-white/65"><div class="mx-auto max-w-7xl px-5 py-10 text-sm"><div class="flex flex-col justify-between gap-5 md:flex-row"><p>Chùa Thiên Mụ · Kim Long, Huế</p><p class="max-w-xl md:text-right">Trang thông tin độc lập dành cho khách tham quan; không phải website chính thức của Chùa Thiên Mụ hay cơ quan quản lý di sản.</p></div><p class="mt-6 text-xs text-white/40">Ảnh tham khảo: Wikimedia Commons (Dominik Tefert, Clay Gilliland, Arabsalam). Thông tin giờ mở cửa và chi phí có thể thay đổi theo hoạt động tôn giáo và quản lý thực tế. Đánh giá được đồng bộ từ người dùng Google Maps và bản quyền thuộc về tác giả gốc cùng Google Maps.</p></div></footer>
+
+  <script is:inline>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+  </script>
 </body>
 </html>
