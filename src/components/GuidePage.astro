@@ -1,0 +1,337 @@
+---
+import '../styles/global.css';
+import { ATTRACTION, HERO_IMAGE, GA_ID } from '../data/site';
+import { guides } from '../content/guide';
+import { localeMeta, hreflangAlternates, pagePath, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const g = guides[locale];
+const meta = localeMeta[locale];
+
+const site = Astro.site;
+const domain = 'thienmupagoda.com';
+const canonical = site
+  ? new URL(Astro.url.pathname, site).toString()
+  : `https://${domain}${Astro.url.pathname}`;
+
+const rootUrl = (site ?? new URL(`https://${domain}/`)).toString().replace(/\/$/, '');
+const entityId = `${rootUrl}/#attraction`;
+
+const alt = hreflangAlternates(site ? site.toString() : `https://${domain}`);
+const otherLocale: Locale = locale === 'vi' ? 'en' : 'vi';
+const switchHref = pagePath(otherLocale);
+const switchLabel = locale === 'vi' ? 'EN' : 'VI';
+
+// JSON-LD: cùng một thực thể (@id) cho cả hai ngôn ngữ.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['TouristAttraction', 'BuddhistTemple'],
+  '@id': entityId,
+  name: ATTRACTION.name,
+  alternateName: [ATTRACTION.fullName, ATTRACTION.shortName, ...ATTRACTION.altNames],
+  description: g.metaDescription,
+  url: canonical,
+  image: [HERO_IMAGE],
+  isAccessibleForFree: true,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: `${ATTRACTION.street}, ${ATTRACTION.name}`,
+    addressLocality: ATTRACTION.city,
+    addressRegion: ATTRACTION.region,
+    postalCode: ATTRACTION.postal,
+    addressCountry: ATTRACTION.countryCode
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: ATTRACTION.lat, longitude: ATTRACTION.lng },
+  hasMap: ATTRACTION.mapsUrl,
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '08:00',
+      closes: '18:00'
+    }
+  ],
+  sameAs: [ATTRACTION.mapsUrl, ATTRACTION.govtUrl]
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: g.faqs.map(([q, a]) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a }
+  }))
+};
+
+const navItems = [
+  { href: '#about', label: locale === 'vi' ? 'Giới thiệu' : 'About' },
+  { href: '#visit', label: locale === 'vi' ? 'Tham quan' : 'Visit' },
+  { href: '#transport', label: locale === 'vi' ? 'Di chuyển' : 'Getting there' },
+  { href: '#reviews', label: locale === 'vi' ? 'Đánh giá' : 'Reviews' },
+  { href: '#faq', label: 'FAQ' }
+];
+---
+
+<!doctype html>
+<html lang={meta.htmlLang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{g.metaTitle}</title>
+  <meta name="description" content={g.metaDescription} />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={g.ogTitle} />
+  <meta property="og:description" content={g.ogDescription} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:locale" content={meta.ogLocale} />
+  <meta property="og:image" content={HERO_IMAGE} />
+  <meta property="og:image:alt" content={ATTRACTION.fullName} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#294d3a" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" />
+  <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" sizes="180x180" />
+  {alt.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+  <script type="application/ld+json" set:html={JSON.stringify(faqLd)}></script>
+  <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+  <script is:inline>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HXM22WWPKP');</script>
+</head>
+<body>
+  <header class="sticky top-0 z-50 border-b border-black/10 bg-[#f5efe2]/92 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3">
+      <a href="#top"><img src="/logo.svg" width="220" height="64" alt={ATTRACTION.name} class="h-12 w-auto" /></a>
+      <nav class="hidden gap-6 md:flex">
+        {navItems.map((n) => <a class="navlink" href={n.href}>{n.label}</a>)}
+      </nav>
+      <a class="rounded-full border border-black/15 px-3 py-1 text-xs font-semibold" href={switchHref} hreflang={otherLocale}>{switchLabel}</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero-photo relative min-h-[78vh] text-white">
+      <div class="absolute inset-0 pattern opacity-20"></div>
+      <div class="relative mx-auto flex min-h-[78vh] max-w-7xl items-end px-5 pb-14 pt-28">
+        <div class="max-w-3xl">
+          <p class="kicker !text-[#f4d7a5]">{g.heroKicker}</p>
+          <h1 class="mt-4 text-5xl leading-[.98] font-semibold md:text-8xl">{g.heroTitle}</h1>
+          <p class="mt-5 max-w-2xl text-lg text-white/86 md:text-2xl">{g.heroSub}</p>
+          <div class="mt-8 flex flex-wrap gap-3 text-sm font-semibold">
+            <span class="rounded-full bg-white/14 px-4 py-2 backdrop-blur">{g.heroRating}</span>
+            <span class="rounded-full bg-white/14 px-4 py-2 backdrop-blur">{g.heroFree}</span>
+            <span class="rounded-full bg-white/14 px-4 py-2 backdrop-blur">{g.heroHeritage}</span>
+          </div>
+          <p class="mt-4 text-xs text-white/70">
+            <a class="underline" href={ATTRACTION.mapsUrl} target="_blank" rel="noopener noreferrer">{g.heroMapsNote}</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="mx-auto max-w-7xl px-5 py-16 md:py-24">
+      <div class="grid gap-8 md:grid-cols-[1.2fr_.8fr]">
+        <div>
+          <p class="kicker">{g.introKicker}</p>
+          <h2 class="mt-3 text-4xl md:text-6xl">{g.introTitle}</h2>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-black/70">{g.introBody}</p>
+        </div>
+        <div class="card rounded-[2rem] p-7">
+          <p class="kicker">{g.quickInfoTitle}</p>
+          <dl class="mt-5 space-y-4 text-sm">
+            {g.quickInfo.map((row) => (
+              <div class="flex justify-between gap-4 border-b border-black/10 pb-3">
+                <dt>{row.label}</dt>
+                <dd class="text-right font-semibold">{row.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#f3ead8] border-y border-black/10">
+      <div class="mx-auto max-w-7xl px-5 py-16 md:py-24">
+        <div class="grid gap-8 md:grid-cols-[1.2fr_.8fr]">
+          <div>
+            <p class="kicker">Visitor Guide</p>
+            <h2 class="mt-3 text-4xl md:text-6xl">{g.aboutTitle}</h2>
+            <p class="mt-6 max-w-3xl text-lg leading-8 text-black/70" set:html={g.aboutBody1}></p>
+            <p class="mt-4 text-sm font-semibold tracking-wide text-black/55">{g.aboutBreadcrumb}</p>
+            <p class="mt-4 max-w-3xl text-black/65" set:html={g.aboutBody2}></p>
+          </div>
+          <div class="card rounded-[2rem] p-7">
+            <p class="kicker">{g.aboutQuickTitle}</p>
+            <dl class="mt-5 space-y-4 text-sm">
+              {g.aboutQuick.map((row) => (
+                <div class="flex justify-between gap-4 border-b border-black/10 pb-3">
+                  <dt>{row.label}</dt>
+                  <dd class="text-right font-semibold">{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <p class="mt-5 text-xs text-black/50" set:html={g.aboutGovt}></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid min-h-[560px] md:grid-cols-2">
+      <div class="photo-a min-h-[420px]" role="img" aria-label={ATTRACTION.fullName}></div>
+      <div class="bg-[#294d3a] p-8 text-[#f6f0e3] md:p-16">
+        <p class="kicker !text-[#d6b47a]">{g.spacesKicker}</p>
+        <h2 class="mt-3 text-4xl md:text-5xl">{g.spacesTitle}</h2>
+        <div class="mt-8 grid gap-5">
+          {g.spaces.map((s) => (
+            <article>
+              <h3 class="text-xl font-semibold">{s.n} · {s.title}</h3>
+              <p class="mt-2 text-white/70">{s.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="visit" class="mx-auto max-w-7xl px-5 py-16 md:py-24">
+      <div class="grid gap-6 md:grid-cols-3">
+        {g.visitCards.map((c) => (
+          <article class="card rounded-3xl p-7">
+            <p class="kicker">{c.kicker}</p>
+            <h3 class="mt-3 text-2xl font-semibold">{c.title}</h3>
+            <p class="mt-3 leading-7 text-black/65">{c.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="transport" class="bg-[#7f2f2a] text-[#fff6e8]">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 md:grid-cols-2 md:py-24">
+        <div>
+          <p class="kicker !text-[#f2cf91]">{g.transportKicker}</p>
+          <h2 class="mt-3 text-4xl md:text-5xl">{g.transportTitle}</h2>
+          <div class="mt-7 space-y-5 text-white/78">
+            {g.transportItems.map((t) => (
+              <p><b class="text-white">{t.b}</b> {t.text}</p>
+            ))}
+          </div>
+        </div>
+        <div class="overflow-hidden rounded-[2rem] bg-white/10 p-2">
+          <iframe title={ATTRACTION.fullName} class="h-[430px] w-full rounded-[1.6rem] border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src={ATTRACTION.mapsEmbed}></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-5 py-16 md:py-24">
+      <div class="grid gap-6 md:grid-cols-2">
+        <article class="card rounded-3xl p-7">
+          <p class="kicker">{g.parkingKicker}</p>
+          <h2 class="mt-3 text-3xl">{g.parkingTitle}</h2>
+          <p class="mt-4 leading-7 text-black/65">{g.parkingBody}</p>
+        </article>
+        <article class="card rounded-3xl p-7">
+          <p class="kicker">{g.parkingKicker}</p>
+          <h2 class="mt-3 text-3xl">{g.etiquetteTitle}</h2>
+          <p class="mt-4 leading-7 text-black/65">{g.etiquetteBody}</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="food" class="pattern border-y border-black/10">
+      <div class="mx-auto max-w-7xl px-5 py-16 md:py-24">
+        <p class="kicker">{g.foodKicker}</p>
+        <h2 class="mt-3 text-4xl md:text-5xl">{g.foodTitle}</h2>
+        <div class="mt-8 grid gap-5 md:grid-cols-4">
+          {g.foods.map((f) => (
+            <div class="card rounded-3xl p-6">
+              <h3 class="text-xl font-semibold">{f.title}</h3>
+              <p class="mt-2 text-sm leading-6 text-black/60">{f.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="nearby" class="mx-auto max-w-7xl px-5 py-16 md:py-24">
+      <div class="grid gap-10 md:grid-cols-[.9fr_1.1fr]">
+        <div class="photo-b min-h-[430px] rounded-[2rem]" role="img" aria-label={ATTRACTION.fullName}></div>
+        <div>
+          <p class="kicker">{g.nearbyKicker}</p>
+          <h2 class="mt-3 text-4xl md:text-5xl">{g.nearbyTitle}</h2>
+          <div class="mt-7 space-y-4">
+            {g.nearbyItems.map((n) => (
+              <div class="border-b border-black/10 pb-4">
+                <h3 class="text-xl font-semibold">{n.title}</h3>
+                <p class="mt-1 text-black/60">{n.body}</p>
+              </div>
+            ))}
+          </div>
+          {g.nearbyNote && <p class="mt-6 text-black/55" set:html={g.nearbyNote}></p>}
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews" class="bg-[#f3ead8] border-y border-black/10">
+      <div class="mx-auto max-w-7xl px-5 py-16 md:py-24">
+        <div class="card rounded-[2rem] p-8 md:p-10">
+          <p class="kicker">{g.reviewsKicker}</p>
+          <div class="mt-4 flex flex-wrap items-center gap-5">
+            <span class="text-5xl font-semibold text-[#b78a43]">★ {ATTRACTION.rating.value}</span>
+            <div>
+              <p class="text-lg font-semibold">{g.reviewsTitle}</p>
+              <p class="mt-1 max-w-2xl text-sm text-black/55">{g.reviewsBody}</p>
+            </div>
+          </div>
+          <a class="mt-6 inline-block rounded-full bg-[#294d3a] px-6 py-3 text-sm font-semibold text-white" href={ATTRACTION.mapsUrl} target="_blank" rel="noopener noreferrer">{g.reviewsCta}</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-[#25392e] text-[#f7f0e4]">
+      <div class="mx-auto max-w-4xl px-5 py-16 md:py-24">
+        <p class="kicker !text-[#d7b477]">FAQ</p>
+        <h2 class="mt-3 text-4xl md:text-5xl">{g.faqTitle}</h2>
+        <div class="mt-8 divide-y divide-white/15">
+          {g.faqs.map(([q, a]) => (
+            <details class="py-5 group">
+              <summary class="cursor-pointer list-none text-xl font-semibold">{q}<span class="float-right text-white/50 group-open:rotate-45">＋</span></summary>
+              <p class="mt-3 max-w-3xl leading-7 text-white/65">{a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="sources" class="mx-auto max-w-7xl px-5 py-16 md:py-20">
+      <p class="kicker">{g.sourcesKicker}</p>
+      <h2 class="mt-3 text-3xl md:text-4xl">{g.sourcesTitle}</h2>
+      <ul class="mt-6 space-y-3 text-sm text-black/70">
+        {g.sourcesItems.map((s) => <li set:html={s}></li>)}
+      </ul>
+    </section>
+  </main>
+
+  <footer class="bg-[#16231c] text-white/65">
+    <div class="mx-auto max-w-7xl px-5 py-10 text-sm">
+      <div class="flex flex-col justify-between gap-5 md:flex-row">
+        <p>{g.footerText}</p>
+        <p class="max-w-xl md:text-right">{g.footerDisclaimer}</p>
+      </div>
+      <p class="mt-6 text-xs text-white/40">Ảnh tham khảo: Wikimedia Commons (Dominik Tefert, Clay Gilliland, Arabsalam). Thông tin giờ mở cửa và chi phí có thể thay đổi theo hoạt động tôn giáo và quản lý thực tế. Đánh giá được đồng bộ từ người dùng Google Maps và bản quyền thuộc về tác giả gốc cùng Google Maps.</p>
+    </div>
+  </footer>
+
+  <script is:inline>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

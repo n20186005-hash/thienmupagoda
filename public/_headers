@@ -1,2 +1,10 @@
+# Bảo mật toàn site (HSTS + các header phòng thủ cơ bản)
+/*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
