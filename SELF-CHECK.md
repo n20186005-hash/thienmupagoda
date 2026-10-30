@@ -1,11 +1,5 @@
-# Self-check
+# Local verification and release scope
 
-Required clean-room sequence:
-1. `rm -rf node_modules dist`
-2. `CI=1 corepack pnpm install --frozen-lockfile`
-3. `pnpm check`
-4. `pnpm build`
-5. `grep -R -nE 'example\.com|localhost|chrome-extension://' dist || true`
-6. The canonical domain is fixed in `astro.config.ts` (`https://www.thienmupagoda.com`, overridable via `SITE_URL`), so the sitemap is always generated. Inspect the generated `sitemap-index.xml` and confirm all URLs use that real domain and carry `hreflang` alternates.
+Use Node24.21 / pnpm12.4.2, normal `pnpm install --frozen-lockfile`, `pnpm check`, and the historical `pnpm run build`. Deployment is a separate authorised step. Default `pnpm exec wrangler deploy --dry-run` must follow the generated native Cloudflare configuration and preserve SESSION/IMAGES/ASSETS. Exact dependency and lock versions remain unchanged.
 
-This package was assembled in a runtime where direct npm registry downloads were blocked, so dependency installation/build verification could not be completed in that runtime. The source-level checks and version pinning were completed; run the sequence above in a network-enabled clean environment before production deploy.
+Check both normal SSR languages, their sitemap/canonical/hreflang, full known-host redirect targets including path/query, assets and unknown/explicit404 aliases. Error pages must be HTTP404/noindex without canonical metadata. Browser layout, actual interactions and exact production release remain separate acceptance gates.

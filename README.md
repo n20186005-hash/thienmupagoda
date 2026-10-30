@@ -1,53 +1,16 @@
-# Chùa Thiên Mụ — Astro + Tailwind + Cloudflare
+# Thiên Mụ Pagoda independent visitor guide
 
-Trang thông tin độc lập về Chùa Thiên Mụ (Thiên Mụ Pagoda), thiết kế theo không khí
-cổ tự Huế. Hỗ trợ hai ngôn ngữ: **Tiếng Việt** (`/`) và **English** (`/en/`), với
-thẻ `hreflang` đầy đủ để Google phân phối đúng phiên bản theo vùng/ngôn ngữ.
+Two native Astro SSR routes: Vietnamese `/`, English `/en/`. Canonical https://www.thienmupagoda.com/; existing exact dependencies and pnpm lock retained. Node24.21.0 / pnpm12.4.2, Astro7.3.3, Cloudflare adapter14.3.2, Wrangler4.133.0. Historical project name is `thienmupagoda`; SESSION/IMAGES/ASSETS are preserved without new bindings.
 
-## Miền chuẩn (canonical) và chuyển hướng
-
-Miền chuẩn đã thống nhất là **`https://www.thienmupagoda.com`** (đặt cố định trong
-`astro.config.ts`, có thể ghi đè bằng biến `SITE_URL`). Mọi `canonical`, `og:url`,
-`hreflang` và sitemap đều dùng miền này.
-
-Vì site chạy trên Cloudflare Workers (Static Assets), **không thể** cấu hình chuyển
-hướng cấp miền bằng `_redirects`. Cần thiết lập tại **Cloudflare dashboard**:
-
-1. **Always Use HTTPS** (bật) — ép `http://` → `https://`.
-2. **Redirect Rules** — chuyển `https://thienmupagoda.com/*` → `https://www.thienmupagoda.com/$1`
-   (non-www → www) để gộp quyền SEO về một miền duy nhất (tránh trùng lặp như trong
-   báo cáo Google Search Console: http / https://www / https://).
-
-Đồng bộ luôn URL trên **Google Business Profile** về `https://www.thienmupagoda.com/`.
-
-## Cấu trúc nội dung
-
-- `src/data/site.ts` — sự thật trung lập ngôn ngữ (tên, tọa độ, địa chỉ, đánh giá, bản đồ).
-- `src/i18n.ts` — cấu hình locale, `hreflangAlternates`, `og:locale`.
-- `src/content/guide.ts` — toàn bộ văn bản theo `vi` / `en`.
-- `src/components/GuidePage.astro` — trình bày chung, phát ra `canonical` + `hreflang` + JSON-LD.
-- `src/pages/index.astro` (vi) và `src/pages/en/index.astro` (en).
-
-## Lệnh
-
-```bash
-corepack enable
-CI=1 corepack pnpm install --frozen-lockfile
+```sh
+pnpm install --frozen-lockfile
 pnpm check
-pnpm build
+pnpm run build
+pnpm exec wrangler deploy --dry-run
 ```
 
-## Cloudflare Worker
+The source Worker compiles through the existing adapter, normalizes established HTTP/non-www entrances to HTTPS www while retaining path/query, and then delegates to the native handler. The guide contains no verified fixed admission tariff or weekly operating schedule. Google Maps figures and closing time are dated manual snapshots, not automatic synchronization or locally collected reviews.
 
-`@astrojs/cloudflare` đã được cấu hình. Sau build, triển khai bằng Wrangler/Cloudflare
-dashboard theo workflow của bạn.
+Automatic GA4 is retained and disclosed. Cloudflare edge processing and possible independent visit measurement are distinct. No consent or analytics disable switch is claimed. Maps is an outbound link. Legacy offline cache retirement takes effect only when the browser receives the updated service worker.
 
-## Ảnh
-
-Ba ảnh thật đang trỏ tới Wikimedia Commons để bảo đảm đúng nguồn và quyền sử dụng. Nếu
-muốn 100% local, tải đúng các URL ghi trong `src/styles/global.css` vào `public/images/`,
-sau đó thay các `url(...)` thành `/images/...`.
-
-## GA4
-
-Measurement ID: `G-HXM22WWPKP`.
+Current imagery is an original schematic, explicitly not a photograph or exact site survey; see CREDITS.md. Unverified remote photographs were removed. Local build success is not deployment/production acceptance; see SELF-CHECK.md.

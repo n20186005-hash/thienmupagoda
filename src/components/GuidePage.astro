@@ -25,37 +25,10 @@ const otherLocale: Locale = locale === 'vi' ? 'en' : 'vi';
 const switchHref = pagePath(otherLocale);
 const switchLabel = locale === 'vi' ? 'EN' : 'VI';
 
-// JSON-LD: cùng một thực thể (@id) cho cả hai ngôn ngữ.
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': ['TouristAttraction', 'BuddhistTemple'],
-  '@id': entityId,
-  name: ATTRACTION.name,
-  alternateName: [ATTRACTION.fullName, ATTRACTION.shortName, ...ATTRACTION.altNames],
-  description: g.metaDescription,
-  url: canonical,
-  image: [HERO_IMAGE],
-  isAccessibleForFree: true,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: `${ATTRACTION.street}, ${ATTRACTION.name}`,
-    addressLocality: ATTRACTION.city,
-    addressRegion: ATTRACTION.region,
-    postalCode: ATTRACTION.postal,
-    addressCountry: ATTRACTION.countryCode
-  },
-  geo: { '@type': 'GeoCoordinates', latitude: ATTRACTION.lat, longitude: ATTRACTION.lng },
-  hasMap: ATTRACTION.mapsUrl,
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      opens: '08:00',
-      closes: '18:00'
-    }
-  ],
-  sameAs: [ATTRACTION.mapsUrl, ATTRACTION.govtUrl]
-};
+const jsonLd = {'@context':'https://schema.org','@type':'WebPage','@id':canonical+'#webpage',url:canonical,name:g.metaTitle,description:g.metaDescription,about:{'@type':'BuddhistTemple','@id':entityId,name:ATTRACTION.name,address:{'@type':'PostalAddress',addressLocality:'Huế',addressCountry:'VN'}}};
+const note = {"vi": {"address": "Maps ghi Kim Long, Huế; đây là tham chiếu khu vực, không phải địa chỉ bưu chính hay cổng vào chính xác đã xác minh. Tìm theo tên chùa và xác nhận điểm đến với đơn vị vận chuyển.", "privacy": "Google Analytics 4 tự động tải; có thể dùng cookie và nhận URL, trang giới thiệu, sự kiện, dữ liệu trình duyệt và thiết bị. Trang không có công tắc đồng ý hoặc tắt phân tích và không hứa ẩn danh hoàn toàn. Cloudflare xử lý IP, kết nối, yêu cầu, an ninh và hiệu năng; dịch vụ lưu trữ có thể thêm phép đo truy cập độc lập gồm lượt xem, URL, trang giới thiệu và dữ liệu thiết bị. Việc chèn mã không chứng minh mã đã chạy hay gửi dữ liệu. Đây là luồng riêng với GA và xử lý an ninh tại edge. Một mẫu HTML trang chủ www qua LAX ngày 2026-10-30 không có dấu beacon; không loại trừ các phản hồi khác hoặc thay đổi cấu hình. Liên kết bên ngoài có chính sách riêng. Không có tài khoản, đặt chỗ, thanh toán, biểu mẫu hay yêu cầu vị trí. Bộ nhớ ngoại tuyến cũ chỉ được gỡ khi trình duyệt nhận bản cập nhật; không đảm bảo dữ liệu mới khi ngoại tuyến.", "diagram": "Minh họa sơ đồ nguyên gốc, không phải ảnh chụp hoặc bản vẽ hiện trạng chính xác."}, "en": {"address": "Maps lists Kim Long, Huế as a place reference, not a verified postal address or exact entrance. Search by the pagoda’s name and confirm the drop-off point with your transport provider.", "privacy": "Google Analytics 4 loads automatically and may use cookies and receive URLs, referrers, events, browser and device data. This site has no consent or analytics disable switch and does not promise complete anonymity. Cloudflare processes IP, connection, request, security and performance data; hosting may independently add visit measurement involving page views, URLs, referrers and device data. Script injection alone does not prove execution or transmission. This is separate from GA and edge security processing. One www homepage HTML sample via LAX on 2026-10-30 had no beacon marker; it does not exclude other responses or later settings. External links have their own policies. There are no accounts, bookings, payments, forms or location requests. Older offline caches retire only when the browser receives the update; current information is not promised offline.", "diagram": "Original schematic illustration, not a photograph or an exact survey of the site."}}[locale];
+const diagramNote=note.diagram;
+const menuLabel=locale==='vi'?'Mục lục':'Menu';
 
 const faqLd = {
   '@context': 'https://schema.org',
@@ -89,9 +62,9 @@ const navItems = [
   <meta property="og:description" content={g.ogDescription} />
   <meta property="og:url" content={canonical} />
   <meta property="og:locale" content={meta.ogLocale} />
-  <meta property="og:image" content={HERO_IMAGE} />
-  <meta property="og:image:alt" content={ATTRACTION.fullName} />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content={rootUrl+HERO_IMAGE} />
+  <meta property="og:image:alt" content={diagramNote} />
+  <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={g.metaTitle}/><meta name="twitter:description" content={g.ogDescription}/><meta name="twitter:image" content={rootUrl+HERO_IMAGE}/><meta name="twitter:image:alt" content={diagramNote}/>
   <meta name="theme-color" content="#294d3a" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
@@ -108,11 +81,12 @@ const navItems = [
   <header class="sticky top-0 z-50 border-b border-black/10 bg-[#f5efe2]/92 backdrop-blur-xl">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3">
       <a href="#top"><img src="/logo.svg" width="220" height="64" alt={ATTRACTION.name} class="h-12 w-auto" /></a>
-      <nav class="hidden gap-6 md:flex">
+      <nav class="hidden gap-6 xl:flex" aria-label={menuLabel}>
         {navItems.map((n) => <a class="navlink" href={n.href}>{n.label}</a>)}
       </nav>
       <a class="rounded-full border border-black/15 px-3 py-1 text-xs font-semibold" href={switchHref} hreflang={otherLocale}>{switchLabel}</a>
     </div>
+    <details class="mobile-menu xl:hidden"><summary>{menuLabel}</summary><nav aria-label={menuLabel}>{navItems.map(n=><a href={n.href}>{n.label}</a>)}</nav></details>
   </header>
 
   <main id="top">
@@ -135,6 +109,7 @@ const navItems = [
       </div>
     </section>
 
+    <p class="illustration-note">{diagramNote} · 2026 · <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a></p>
     <section id="about" class="mx-auto max-w-7xl px-5 py-16 md:py-24">
       <div class="grid gap-8 md:grid-cols-[1.2fr_.8fr]">
         <div>
@@ -160,7 +135,7 @@ const navItems = [
       <div class="mx-auto max-w-7xl px-5 py-16 md:py-24">
         <div class="grid gap-8 md:grid-cols-[1.2fr_.8fr]">
           <div>
-            <p class="kicker">Visitor Guide</p>
+            <p class="kicker">{g.aboutKicker}</p>
             <h2 class="mt-3 text-4xl md:text-6xl">{g.aboutTitle}</h2>
             <p class="mt-6 max-w-3xl text-lg leading-8 text-black/70" set:html={g.aboutBody1}></p>
             <p class="mt-4 text-sm font-semibold tracking-wide text-black/55">{g.aboutBreadcrumb}</p>
@@ -183,7 +158,7 @@ const navItems = [
     </section>
 
     <section class="grid min-h-[560px] md:grid-cols-2">
-      <div class="photo-a min-h-[420px]" role="img" aria-label={ATTRACTION.fullName}></div>
+      <figure class="diagram-panel"><img src="/images/tower-diagram.svg" width="1200" height="800" alt={diagramNote} loading="lazy"/><figcaption>{diagramNote} · 2026 · <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a></figcaption></figure>
       <div class="bg-[#294d3a] p-8 text-[#f6f0e3] md:p-16">
         <p class="kicker !text-[#d6b47a]">{g.spacesKicker}</p>
         <h2 class="mt-3 text-4xl md:text-5xl">{g.spacesTitle}</h2>
@@ -217,13 +192,11 @@ const navItems = [
           <h2 class="mt-3 text-4xl md:text-5xl">{g.transportTitle}</h2>
           <div class="mt-7 space-y-5 text-white/78">
             {g.transportItems.map((t) => (
-              <p><b class="text-white">{t.b}</b> {t.text}</p>
+              <p><b class="text-white">{t.b}</b>{' '}{t.text}</p>
             ))}
           </div>
         </div>
-        <div class="overflow-hidden rounded-[2rem] bg-white/10 p-2">
-          <iframe title={ATTRACTION.fullName} class="h-[430px] w-full rounded-[1.6rem] border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src={ATTRACTION.mapsEmbed}></iframe>
-        </div>
+        <div class="rounded-[2rem] border border-white/30 p-7"><h3 class="text-2xl">{locale==='vi'?'Bản đồ tham khảo':'Map reference'}</h3><p class="mt-4 leading-7">{note.address}</p><a class="mt-6 inline-block rounded-full bg-[#f5efe2] px-6 py-3 font-semibold text-[#16231c]" href={ATTRACTION.mapsUrl} target="_blank" rel="noopener noreferrer">{locale==='vi'?'Mở Google Maps':'Open Google Maps'} ↗</a></div>
       </div>
     </section>
 
@@ -258,8 +231,8 @@ const navItems = [
     </section>
 
     <section id="nearby" class="mx-auto max-w-7xl px-5 py-16 md:py-24">
-      <div class="grid gap-10 md:grid-cols-[.9fr_1.1fr]">
-        <div class="photo-b min-h-[430px] rounded-[2rem]" role="img" aria-label={ATTRACTION.fullName}></div>
+      <div class="max-w-4xl">
+        
         <div>
           <p class="kicker">{g.nearbyKicker}</p>
           <h2 class="mt-3 text-4xl md:text-5xl">{g.nearbyTitle}</h2>
@@ -322,16 +295,12 @@ const navItems = [
         <p>{g.footerText}</p>
         <p class="max-w-xl md:text-right">{g.footerDisclaimer}</p>
       </div>
-      <p class="mt-6 text-xs text-white/40">Ảnh tham khảo: Wikimedia Commons (Dominik Tefert, Clay Gilliland, Arabsalam). Thông tin giờ mở cửa và chi phí có thể thay đổi theo hoạt động tôn giáo và quản lý thực tế. Đánh giá được đồng bộ từ người dùng Google Maps và bản quyền thuộc về tác giả gốc cùng Google Maps.</p>
+      <section id="privacy" class="mt-8 max-w-4xl"><h2 class="text-2xl text-white">{locale==='vi'?'Quyền riêng tư và phân tích':'Privacy and analytics'}</h2><p class="mt-4 leading-7">{note.privacy}</p><p class="mt-4"><a href="https://policies.google.com/privacy">Google privacy</a> · <a href="https://tools.google.com/dlpage/gaoptout">Google opt-out</a> · <a href="https://developers.cloudflare.com/web-analytics/data-metrics/">Cloudflare Web Analytics</a> · <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare privacy</a></p></section>
     </div>
   </footer>
 
   <script is:inline>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
-      });
-    }
+    if ('serviceWorker' in navigator) navigator.serviceWorker.getRegistration('/').then(r=>r?.update()).catch(()=>{});
   </script>
 </body>
 </html>

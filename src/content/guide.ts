@@ -1,4 +1,3 @@
-import { ATTRACTION } from '../data/site';
 import type { Locale } from '../i18n';
 
 // Toàn bộ nội dung theo ngôn ngữ. Mỗi khối văn bản nằm ở đây, GuidePage.astro
@@ -76,383 +75,357 @@ export interface Guide {
   footerDisclaimer: string;
 }
 
-const mapsLink = (label: string) =>
-  `<a class="underline" href="${ATTRACTION.mapsUrl}" target="_blank" rel="noopener noreferrer">${label}</a>`;
-const govtLink = (label: string) =>
-  `<a class="underline" href="${ATTRACTION.govtUrl}" target="_blank" rel="noopener noreferrer">${label}</a>`;
-
-const vi: Guide = {
-  metaTitle: 'Chùa Thiên Mụ (Thiên Mụ Pagoda) — Huế, Việt Nam | Lịch sử, đường đi & đánh giá',
-  metaDescription:
-    'Cẩm nang tham quan Chùa Thiên Mụ (Thiên Mụ Pagoda) ở Kim Long, Huế: vị trí trên bản đồ, giờ mở cửa, miễn phí vào cửa, tháp Phước Duyên 7 tầng, gần Kinh thành Huế và sông Hương, cùng đánh giá từ Google Maps.',
-  ogTitle: 'Chùa Thiên Mụ — Huế Travel Guide',
-  ogDescription:
-    'Cẩm nang độc lập về Chùa Thiên Mụ (Thiên Mụ Pagoda) tại Huế, Thừa Thiên Huế, Việt Nam: vị trí, giờ tham quan, đánh giá và gợi ý lịch trình.',
-
-  heroKicker: 'Kim Long · Huế · Việt Nam',
-  heroTitle: 'Chùa Thiên Mụ',
-  heroSub:
-    'Một nhịp tĩnh lặng trên đồi Hà Khê — nơi tháp Phước Duyên bảy tầng soi bóng xuống dòng Hương Giang.',
-  heroRating: '★ 4,6 · 20.248 đánh giá',
-  heroFree: 'Vào cửa miễn phí',
-  heroHeritage: 'Di sản trong Quần thể Di tích Cố đô Huế',
-  heroMapsNote: `Đánh giá &amp; số lượt đánh giá đồng bộ từ đánh giá người dùng Google Maps · tháng 9/2026 · Xem tất cả trên Google Maps ↗`,
-
-  introKicker: 'Cốt cách xứ Huế',
-  introTitle: 'Từ năm 1601 đến biểu tượng Phước Duyên',
-  introBody:
-    'Chùa được khởi dựng dưới thời chúa Nguyễn Hoàng. UNESCO ghi nhận Thiên Mụ là một thành phần của Quần thể Di tích Cố đô Huế; tháp Phước Duyên bảy tầng được xây dưới triều Thiệu Trị vào thế kỷ XIX. Không gian chùa kéo dài từ bờ sông lên các lớp sân, cổng, điện thờ và vườn cây — một trục tham quan nên đi thật chậm.',
-  quickInfoTitle: 'Thông tin nhanh',
-  quickInfo: [
-    { label: 'Địa chỉ', value: 'Kim Long, Huế 532761' },
-    { label: 'Giờ tham khảo', value: '08:00–18:00' },
-    { label: 'Chi phí vào cửa', value: 'Miễn phí' },
-    { label: 'Plus Code', value: 'FG3V+7W Kim Long' }
-  ],
-
-  aboutKicker: 'Visitor Guide',
-  aboutTitle: 'Về Chùa Thiên Mụ',
-  aboutBody1:
-    'Chào mừng đến với <strong>Chùa Thiên Mụ</strong>, ngôi chùa được biết đến rộng rãi với tên <strong>Thien Mu Pagoda</strong>. Tọa lạc tại lõi <strong>Huế</strong>, <strong>Thừa Thiên Huế</strong>, <strong>Vietnam</strong>, đây là điểm đến tâm linh và di sản nổi bật bên sông Hương, dễ dàng kết hợp trong hành trình khám phá miền Trung.',
-  aboutBreadcrumb: 'Chùa Thiên Mụ → Huế → Thừa Thiên Huế → Vietnam',
-  aboutBody2:
-    'Khi viếng <strong>Chùa Thiên Mụ</strong>, du khách có thể dễ dàng ghép thêm các di tích lân cận như <strong>Kinh thành Huế</strong> và <strong>sông Hương</strong> trong cùng một ngày.',
-  aboutQuickTitle: 'Thông tin tóm tắt',
-  aboutQuick: [
-    { label: 'Điểm tham quan', value: 'Thien Mu Pagoda' },
-    { label: 'Thành phố', value: 'Huế' },
-    { label: 'Tỉnh/Thành', value: 'Thừa Thiên Huế' },
-    { label: 'Quốc gia', value: 'Vietnam' }
-  ],
-  aboutGovt: `Thông tin du lịch chính thức vùng, xem ${govtLink('Vietnam National Authority of Tourism ↗')}.`,
-
-  spacesKicker: 'Một vòng tham quan',
-  spacesTitle: 'Những lớp không gian đáng dừng lại',
-  spaces: [
-    {
-      n: '01',
-      title: 'Tháp Phước Duyên',
-      body: 'Biểu tượng nổi bật nhất của chùa, bảy tầng, dựng dưới triều Thiệu Trị.'
-    },
-    {
-      n: '02',
-      title: 'Cổng Tam Quan & Điện Đại Hùng',
-      body: 'Trục nghi lễ chính; hãy giữ giọng nói nhỏ và quan sát quy định trước khi vào nội điện.'
-    },
-    {
-      n: '03',
-      title: 'Vườn chùa & sông Hương',
-      body: 'Khoảng lặng sau các công trình chính, hợp để nghỉ chân trước khi xuống bến sông.'
-    }
-  ],
-
-  visitKicker: 'Tham quan',
-  visitCards: [
-    {
-      kicker: 'Vé / chi phí',
-      title: 'Miễn phí tham quan',
-      body: 'Không thu vé vào khuôn viên theo các nguồn du lịch cập nhật. Các khoản như gửi xe, thuyền sông Hương, đồ lễ hoặc hướng dẫn viên là chi phí riêng và có thể thay đổi.'
-    },
-    {
-      kicker: 'Thời điểm',
-      title: 'Sáng sớm hoặc cuối chiều',
-      body: 'Mùa xuân Huế thường dễ chịu nhất. Sáng cho không khí tĩnh, chiều có ánh sáng đẹp bên sông; mùa mưa kéo dài nên nên xem dự báo trước khi đi.'
-    },
-    {
-      kicker: 'Thời lượng',
-      title: 'Khoảng 60–90 phút',
-      body: 'Đủ để đi trọn tuyến chính mà không vội. Nếu kết hợp đi thuyền, chụp ảnh hoặc dự lễ, nên chừa thêm thời gian.'
-    }
-  ],
-
-  transportKicker: 'Chi tiết giao thông',
-  transportTitle: 'Đi theo bờ sông, hoặc đến bằng thuyền',
-  transportItems: [
-    {
-      b: 'Xe máy / ô tô:',
-      text: 'từ trung tâm Huế đi theo hướng Kim Long – Nguyễn Phúc Nguyên. Đường dễ đi, quãng đường khoảng vài kilomet tùy điểm xuất phát.'
-    },
-    {
-      b: 'Xe đạp:',
-      text: 'phù hợp nếu thời tiết mát; cung đường ven sông cho nhịp đi chậm.'
-    },
-    {
-      b: 'Thuyền rồng:',
-      text: 'có các chuyến trên sông Hương kết nối khu trung tâm và bến gần chùa; nên hỏi giờ chạy và giá tại ngày đi.'
-    },
-    {
-      b: 'Taxi / xe công nghệ:',
-      text: 'thuận tiện cho nhóm nhỏ và khi trời mưa.'
-    }
-  ],
-
-  parkingKicker: 'Gửi xe & ứng xử',
-  parkingTitle: 'Gửi xe quanh lối vào',
-  parkingBody:
-    'Khu vực gần chùa có các điểm trông xe phục vụ khách. Mức phí có thể thay đổi theo loại xe và thời điểm; hãy xem bảng giá niêm yết tại chỗ trước khi gửi. Tránh đỗ chắn lối dân sinh và bến thuyền.',
-  etiquetteTitle: 'Ứng xử tại nơi thờ tự',
-  etiquetteBody:
-    'Che vai và đầu gối, không tạo dáng phản cảm trước điện thờ, hạn chế dùng flash và làm theo biển hướng dẫn. Khi có khóa lễ, ưu tiên không gian cho Phật tử.',
-
-  foodKicker: 'Quanh Kim Long',
-  foodTitle: 'Ẩm thực nên tìm sau khi vãn cảnh',
-  foods: [
-    { title: 'Bún bò Huế', body: 'Nước dùng đậm, sả thơm; hợp cho bữa sáng hoặc trưa.' },
-    { title: 'Bánh bèo · nậm · lọc', body: 'Nhóm bánh nhỏ đặc trưng Huế, dễ gọi nhiều món để chia sẻ.' },
-    { title: 'Cơm chay', body: 'Phù hợp tinh thần chuyến viếng chùa; Huế có truyền thống ẩm thực chay phong phú.' },
-    { title: 'Chè Huế', body: 'Một kết thúc nhẹ nhàng sau buổi đi bộ trong khuôn viên chùa.' }
-  ],
-
-  nearbyKicker: 'Điểm lân cận',
-  nearbyTitle: "Ghép thành một ngày rất “Huế”",
-  nearbyItems: [
-    { title: 'Kinh thành Huế', body: 'Trung tâm di sản triều Nguyễn, dễ kết hợp trước hoặc sau Thiên Mụ.' },
-    { title: 'Văn Miếu Huế', body: 'Nằm cùng hành lang di sản phía tây bắc, gần tuyến ven sông.' },
-    { title: 'Hổ Quyền – Điện Voi Ré', body: 'Một cụm di tích ít ồn hơn, giúp hiểu thêm nghi lễ và lịch sử triều Nguyễn.' },
-    { title: 'Lăng Tự Đức', body: 'Không gian lăng tẩm nổi tiếng phía tây nam thành phố; nên dành thời gian riêng để tham quan chậm.' }
-  ],
-  nearbyNote:
-    'For an English-speaking itinerary, nearby highlights include the <strong>Imperial City of Huế</strong> and a cruise on the <strong>Perfume River</strong>.',
-
-  reviewsKicker: 'Đánh giá từ Google Maps',
-  faqTitle: 'Câu hỏi thường gặp',
-  reviewsTitle: '4,6 / 5 · 20.248 đánh giá',
-  reviewsBody:
-    'Đồng bộ từ đánh giá người dùng Google Maps, thời gian đồng bộ: tháng 9/2026. Bản quyền thuộc về tác giả gốc và Google Maps.',
-  reviewsCta: 'Xem tất cả đánh giá trên Google Maps ↗',
-
-  faqs: [
-    [
-      'Chùa Thiên Mụ có thu vé không?',
-      'Không. Việc vào khuôn viên chùa được nhiều nguồn du lịch hiện hành ghi nhận là miễn phí; nên chuẩn bị chi phí riêng cho gửi xe, đi thuyền hoặc dịch vụ cá nhân.'
+export const guides: Record<Locale, Guide> = {
+  "vi": {
+    "metaTitle": "Chùa Thiên Mụ, Huế: lịch sử, giờ cần xác nhận và đường đi",
+    "metaDescription": "Chùa Thiên Mụ, còn gọi là Linh Mụ, nằm trên đồi Hà Khê bên sông Hương ở Huế. Đây là nơi sinh hoạt Phật giáo: hãy ưu tiên không gian thờ tự khi tham quan.",
+    "ogTitle": "Chùa Thiên Mụ, Huế: lịch sử, giờ cần xác nhận và đường đi",
+    "ogDescription": "Google Maps hiển thị đóng cửa lúc 17:30 khi kiểm tra ngày 2026-10-30. Đây chỉ là ảnh chụp thông tin của bên thứ ba, không phải lịch hằng tuần được nhà chùa xác nhận. Hãy hỏi lại trước khi đi, nhất là vào ngày lễ, khóa lễ hoặc bảo trì.",
+    "heroKicker": "Kim Long · Huế · Việt Nam",
+    "heroTitle": "Chùa Thiên Mụ",
+    "heroSub": "Chùa Thiên Mụ, còn gọi là Linh Mụ, nằm trên đồi Hà Khê bên sông Hương ở Huế. Đây là nơi sinh hoạt Phật giáo: hãy ưu tiên không gian thờ tự khi tham quan.",
+    "heroRating": "★ 4,6 · 20.388 đánh giá",
+    "heroFree": "Xác nhận điều kiện vào chùa",
+    "heroHeritage": "Nơi sinh hoạt Phật giáo",
+    "heroMapsNote": "Ảnh chụp thủ công từ Google Maps ngày 2026-10-30: 4,6/5 và 20.388 đánh giá. Không tự động cập nhật; đây không phải đánh giá do trang này thu thập.",
+    "introKicker": "Cốt cách xứ Huế",
+    "introTitle": "Từ năm 1601 đến biểu tượng Phước Duyên",
+    "introBody": "Nguồn du lịch chính thức ghi nhận chùa được khởi dựng năm 1601, gắn với chúa Nguyễn Hoàng. Tháp Phước Duyên bảy tầng, cao 21 m, là công trình xây sau đó; không nên hiểu tháp hiện nay có từ năm 1601.",
+    "quickInfoTitle": "Thông tin nhanh",
+    "quickInfo": [
+      {
+        "label": "Khu vực",
+        "value": "Kim Long, Huế"
+      },
+      {
+        "label": "Giờ hiển thị trên Maps",
+        "value": "2026-10-30 · 17:30"
+      },
+      {
+        "label": "Phí hiện hành",
+        "value": "Chưa xác minh"
+      }
     ],
-    [
-      'Nên dành bao lâu để tham quan?',
-      'Khoảng 60–90 phút là phù hợp để đi chậm qua tháp Phước Duyên, cổng Tam Quan, điện Đại Hùng, khu vườn và bờ sông.'
+    "aboutKicker": "Cẩm nang tham quan",
+    "aboutTitle": "Về Chùa Thiên Mụ",
+    "aboutBody1": "Maps ghi Kim Long, Huế; đây là tham chiếu khu vực, không phải địa chỉ bưu chính hay cổng vào chính xác đã xác minh. Tìm theo tên chùa và xác nhận điểm đến với đơn vị vận chuyển.",
+    "aboutBreadcrumb": "Chùa Thiên Mụ → Huế → Việt Nam",
+    "aboutBody2": "Maps đánh dấu có lối vào hỗ trợ tiếp cận ngày 2026-10-30. Điều này không xác nhận mọi bậc thang, sân, điện thờ hay nhà vệ sinh đều không có bậc; hỏi rõ tuyến đường phù hợp nhu cầu của bạn.",
+    "aboutQuickTitle": "Thông tin tóm tắt",
+    "aboutQuick": [
+      {
+        "label": "Tên khác",
+        "value": "Linh Mụ"
+      },
+      {
+        "label": "Bối cảnh",
+        "value": "Đồi Hà Khê, sông Hương"
+      },
+      {
+        "label": "Phạm vi",
+        "value": "Chùa và các công trình trong khuôn viên"
+      }
     ],
-    [
-      'Nên mặc gì khi vào chùa?',
-      'Trang phục kín đáo, lịch sự; che vai và đầu gối, nói nhỏ và tuân theo hướng dẫn tại khu thờ tự.'
+    "aboutGovt": "Đối chiếu bản đồ với nguồn du lịch chính thức; nhãn địa chỉ có thể khác nhau.",
+    "spacesKicker": "Một vòng tham quan",
+    "spacesTitle": "Những lớp không gian đáng dừng lại",
+    "spaces": [
+      {
+        "n": "01",
+        "title": "Phước Duyên",
+        "body": "Tháp bảy tầng, cao 21 m, được nguồn du lịch Huế phân biệt với thời điểm khởi dựng chùa."
+      },
+      {
+        "n": "02",
+        "title": "Không gian thờ tự",
+        "body": "Gợi ý ứng xử chung, không phải bản nội quy đã được nhà chùa xác nhận: ăn mặc kín đáo, nói nhỏ, không gián đoạn nghi lễ; xin phép trước khi chụp người hoặc không gian hạn chế. Làm theo biển báo, không chạm đồ thờ hoặc lễ vật."
+      },
+      {
+        "n": "03",
+        "title": "Bến sông và bậc lên",
+        "body": "Tư liệu du lịch số của Huế ghi nhận bến sông và các bậc lên. Không xem đó là bảo đảm thuyền đang hoạt động hoặc tuyến không có bậc."
+      }
     ],
-    [
-      'Thời điểm nào đẹp nhất?',
-      'Buổi sáng mát và yên tĩnh; cuối chiều đẹp để nhìn sông Hương và ánh sáng nghiêng quanh tháp.'
+    "visitKicker": "Tham quan",
+    "visitCards": [
+      {
+        "kicker": "Giờ tham quan",
+        "title": "Hỏi lại trước khi đi",
+        "body": "Google Maps hiển thị đóng cửa lúc 17:30 khi kiểm tra ngày 2026-10-30. Đây chỉ là ảnh chụp thông tin của bên thứ ba, không phải lịch hằng tuần được nhà chùa xác nhận. Hãy hỏi lại trước khi đi, nhất là vào ngày lễ, khóa lễ hoặc bảo trì."
+      },
+      {
+        "kicker": "Chi phí",
+        "title": "Chưa xác minh giá hiện hành",
+        "body": "Chưa xác minh được thông báo giá vé hiện hành rõ ràng của nhà chùa. Không coi giá tour, thuyền hay gửi xe là phí vào chùa; xác nhận riêng từng dịch vụ và điều kiện tiếp cận."
+      },
+      {
+        "kicker": "Thời tiết",
+        "title": "Theo điều kiện thực tế",
+        "body": "Trang không cung cấp thời tiết trực tiếp. Kiểm tra dự báo và cảnh báo của cơ quan khí tượng Việt Nam trước khi đi; mưa, nắng nóng và mặt bậc trơn có thể ảnh hưởng chuyến viếng."
+      }
     ],
-    [
-      'Có thể đến bằng thuyền không?',
-      'Có. Tuyến thuyền trên sông Hương là một cách phổ biến để tiếp cận chùa; lịch và giá thay đổi theo đơn vị khai thác.'
+    "transportKicker": "Chi tiết giao thông",
+    "transportTitle": "Xác nhận lối vào và dịch vụ vận chuyển",
+    "transportItems": [
+      {
+        "b": "Đường bộ:",
+        "text": "Dùng tên chùa trên bản đồ, xác nhận điểm trả khách và lối vào. Không hứa thời gian, khoảng cách hay tình trạng giao thông từ mọi điểm xuất phát."
+      },
+      {
+        "b": "Đường sông:",
+        "text": "Bến sông được ghi trong tư liệu du lịch số; hỏi đơn vị vận chuyển về chuyến đi, giá, điều kiện thời tiết và khả năng tiếp cận. Không mặc định có chuyến hằng ngày."
+      }
     ],
-    [
-      'Where is Thiên Mụ Pagoda located?',
-      'Thiên Mụ Pagoda is located in Kim Long, Huế, Thừa Thiên Huế province, Vietnam, on the northern bank of the Perfume River.'
+    "parkingKicker": "Gửi xe & ứng xử",
+    "parkingTitle": "Gửi xe quanh lối vào",
+    "parkingBody": "Chưa xác minh bãi xe, giá hoặc chỗ trống hiện hành. Hỏi đơn vị vận chuyển và đọc biển tại chỗ; không đỗ chắn lối sinh hoạt hoặc thờ tự.",
+    "etiquetteTitle": "Ứng xử tại nơi thờ tự",
+    "etiquetteBody": "Gợi ý ứng xử chung, không phải bản nội quy đã được nhà chùa xác nhận: ăn mặc kín đáo, nói nhỏ, không gián đoạn nghi lễ; xin phép trước khi chụp người hoặc không gian hạn chế. Làm theo biển báo, không chạm đồ thờ hoặc lễ vật.",
+    "foodKicker": "Quanh Kim Long",
+    "foodTitle": "Ẩm thực nên tìm sau khi vãn cảnh",
+    "foods": [
+      {
+        "title": "Tìm quán đang phục vụ",
+        "body": "Không có chi nhánh hay giờ quán cụ thể được xác minh trong đợt này; kiểm tra trực tiếp trước khi đưa vào lịch trình."
+      },
+      {
+        "title": "Nhu cầu ăn uống",
+        "body": "Nếu cần đồ chay hoặc có dị ứng, hỏi thành phần và cách chế biến; không suy ra mọi món gần chùa đều phù hợp."
+      }
     ],
-    [
-      'Is Thiên Mụ Pagoda free to visit?',
-      'Yes, entry to the temple grounds is free. Separate costs may apply for parking, boat trips on the Perfume River, or personal services.'
+    "nearbyKicker": "Điểm lân cận",
+    "nearbyTitle": "Các điểm riêng trong hành trình Huế",
+    "nearbyItems": [
+      {
+        "title": "Kinh thành Huế",
+        "body": "Điểm di sản riêng; cần kiểm tra vé, thời gian và di chuyển riêng, không phải khu vực thuộc chùa."
+      },
+      {
+        "title": "Sông Hương",
+        "body": "Bối cảnh địa lý của chùa, không phải bảo đảm tour thuyền hoặc lối đi ven sông được mở suốt tuyến."
+      }
     ],
-    [
-      'What are the opening hours?',
-      'The grounds are generally open during daylight hours, roughly 08:00–18:00; hours may vary with religious events and on-site management.'
-    ]
-  ],
-
-  sourcesKicker: 'Nguồn tham khảo',
-  sourcesTitle: 'Đánh giá &amp; tài liệu tham khảo',
-  sourcesItems: [
-    'Đánh giá · đồng bộ tháng 9/2026 — nguồn: đánh giá người dùng Google Maps (Google Maps). Bản quyền thuộc về tác giả gốc và Google Maps.',
-    `Google Maps: ${mapsLink('Xem Chùa Thiên Mụ trên Google Maps ↗')}`,
-    `Du lịch chính thức: ${govtLink('Vietnam National Authority of Tourism ↗')}`
-  ],
-
-  footerText: 'Chùa Thiên Mụ · Kim Long, Huế',
-  footerDisclaimer:
-    'Trang thông tin độc lập dành cho khách tham quan; không phải website chính thức của Chùa Thiên Mụ hay cơ quan quản lý di sản.'
+    "nearbyNote": "",
+    "reviewsKicker": "Đánh giá từ Google Maps",
+    "faqTitle": "Câu hỏi thường gặp",
+    "reviewsTitle": "20.388 đánh giá trên Maps",
+    "reviewsBody": "Ảnh chụp thủ công từ Google Maps ngày 2026-10-30: 4,6/5 và 20.388 đánh giá. Không tự động cập nhật; đây không phải đánh giá do trang này thu thập.",
+    "reviewsCta": "Xem tất cả đánh giá trên Google Maps ↗",
+    "faqs": [
+      [
+        "Chùa nằm ở đâu?",
+        "Maps ghi Kim Long, Huế; đây là tham chiếu khu vực, không phải địa chỉ bưu chính hay cổng vào chính xác đã xác minh. Tìm theo tên chùa và xác nhận điểm đến với đơn vị vận chuyển."
+      ],
+      [
+        "Giờ mở cửa là bao nhiêu?",
+        "Google Maps hiển thị đóng cửa lúc 17:30 khi kiểm tra ngày 2026-10-30. Đây chỉ là ảnh chụp thông tin của bên thứ ba, không phải lịch hằng tuần được nhà chùa xác nhận. Hãy hỏi lại trước khi đi, nhất là vào ngày lễ, khóa lễ hoặc bảo trì."
+      ],
+      [
+        "Có phải mua vé không?",
+        "Chưa xác minh được thông báo giá vé hiện hành rõ ràng của nhà chùa. Không coi giá tour, thuyền hay gửi xe là phí vào chùa; xác nhận riêng từng dịch vụ và điều kiện tiếp cận."
+      ],
+      [
+        "Tháp có từ năm 1601 không?",
+        "Nguồn du lịch chính thức ghi nhận chùa được khởi dựng năm 1601, gắn với chúa Nguyễn Hoàng. Tháp Phước Duyên bảy tầng, cao 21 m, là công trình xây sau đó; không nên hiểu tháp hiện nay có từ năm 1601."
+      ],
+      [
+        "Có tuyến không bậc không?",
+        "Maps đánh dấu có lối vào hỗ trợ tiếp cận ngày 2026-10-30. Điều này không xác nhận mọi bậc thang, sân, điện thờ hay nhà vệ sinh đều không có bậc; hỏi rõ tuyến đường phù hợp nhu cầu của bạn."
+      ],
+      [
+        "Nên ứng xử thế nào?",
+        "Gợi ý ứng xử chung, không phải bản nội quy đã được nhà chùa xác nhận: ăn mặc kín đáo, nói nhỏ, không gián đoạn nghi lễ; xin phép trước khi chụp người hoặc không gian hạn chế. Làm theo biển báo, không chạm đồ thờ hoặc lễ vật."
+      ],
+      [
+        "Đánh giá có tự động cập nhật không?",
+        "Ảnh chụp thủ công từ Google Maps ngày 2026-10-30: 4,6/5 và 20.388 đánh giá. Không tự động cập nhật; đây không phải đánh giá do trang này thu thập."
+      ]
+    ],
+    "sourcesKicker": "Nguồn tham khảo",
+    "sourcesTitle": "Đánh giá & tài liệu tham khảo",
+    "sourcesItems": [
+      "<a class=\"underline\" href=\"https://visithue.vn/ghe-tham-nhung-ngoi-chua-co-kinh-noi-tieng-o-hue/?pid=MjI5NDF8Y3NkbGRs0\">Visit Hue — vị trí, tháp và bối cảnh lịch sử</a>",
+      "<a class=\"underline\" href=\"https://vietnam.travel/de/plan-your-trip/recommended-trip/heritage-sites-vietnam/\">Vietnam Tourism — sông Hương và năm khởi dựng</a>",
+      "<a class=\"underline\" href=\"https://csdlsdl.hue.gov.vn/dulichso/chuathienmu.htm\">Huế — tư liệu du lịch số của khuôn viên</a>",
+      "<a class=\"underline\" href=\"https://nchmf.gov.vn/\">Cơ quan khí tượng Việt Nam: dự báo và cảnh báo</a>"
+    ],
+    "footerText": "Nguồn và ảnh chụp thông tin được đối chiếu ngày 2026-10-30.",
+    "footerDisclaimer": "Cẩm nang du lịch và phổ biến kiến thức độc lập, phi lợi nhuận, không chính thức; không đại diện nhà chùa, chính quyền, cơ quan di sản hay Google."
+  },
+  "en": {
+    "metaTitle": "Thien Mu Pagoda, Hue: history, hours to confirm and access",
+    "metaDescription": "Thiên Mụ, also called Linh Mụ, stands on Hà Khê Hill beside the Perfume River in Huế. It remains a Buddhist religious setting: give worship and ceremonies priority during a visit.",
+    "ogTitle": "Thien Mu Pagoda, Hue: history, hours to confirm and access",
+    "ogDescription": "Google Maps showed closing at 17:30 when checked on 2026-10-30. This is a third-party snapshot, not a weekly schedule confirmed by the pagoda. Check again before travelling, especially around ceremonies, holidays or maintenance.",
+    "heroKicker": "Kim Long · Huế · Vietnam",
+    "heroTitle": "Thien Mu Pagoda",
+    "heroSub": "Thiên Mụ, also called Linh Mụ, stands on Hà Khê Hill beside the Perfume River in Huế. It remains a Buddhist religious setting: give worship and ceremonies priority during a visit.",
+    "heroRating": "★ 4.6 · 20,388 reviews",
+    "heroFree": "Confirm admission conditions",
+    "heroHeritage": "A Buddhist religious place",
+    "heroMapsNote": "Manual Google Maps snapshot dated 2026-10-30: 4.6/5 and 20,388 reviews. It does not update automatically; these are not reviews collected here.",
+    "introKicker": "The spirit of Huế",
+    "introTitle": "From 1601 to the symbol of Phước Duyên",
+    "introBody": "Official tourism sources date the pagoda’s founding to 1601 and associate it with Nguyễn Hoàng. The seven-tier, 21 m Phước Duyên Tower is a later structure; the visible tower should not be dated to 1601.",
+    "quickInfoTitle": "Quick info",
+    "quickInfo": [
+      {
+        "label": "Area reference",
+        "value": "Kim Long, Huế"
+      },
+      {
+        "label": "Maps closing snapshot",
+        "value": "2026-10-30 · 17:30"
+      },
+      {
+        "label": "Current admission",
+        "value": "Not verified"
+      }
+    ],
+    "aboutKicker": "Visitor guide",
+    "aboutTitle": "About Thien Mu Pagoda",
+    "aboutBody1": "Maps lists Kim Long, Huế as a place reference, not a verified postal address or exact entrance. Search by the pagoda’s name and confirm the drop-off point with your transport provider.",
+    "aboutBreadcrumb": "Thien Mu Pagoda → Huế → Vietnam",
+    "aboutBody2": "Maps marked an accessible entrance on 2026-10-30. This does not establish step-free access to every stairway, courtyard, worship hall or toilet; confirm the route appropriate to your needs.",
+    "aboutQuickTitle": "Quick facts",
+    "aboutQuick": [
+      {
+        "label": "Also called",
+        "value": "Linh Mụ"
+      },
+      {
+        "label": "Setting",
+        "value": "Hà Khê Hill, Perfume River"
+      },
+      {
+        "label": "Scope",
+        "value": "Pagoda and its compound"
+      }
+    ],
+    "aboutGovt": "Compare the map listing with official tourism sources; address labels can differ.",
+    "spacesKicker": "A walk through the grounds",
+    "spacesTitle": "Spaces worth pausing at",
+    "spaces": [
+      {
+        "n": "01",
+        "title": "Phước Duyên",
+        "body": "The seven-tier, 21 m tower is distinguished from the pagoda’s founding date by Hue tourism sources."
+      },
+      {
+        "n": "02",
+        "title": "Worship spaces",
+        "body": "General courtesy guidance, rather than a verified temple rulebook: dress modestly, speak quietly and avoid interrupting worship. Ask before photographing people or restricted spaces. Follow signs and do not touch offerings or religious objects."
+      },
+      {
+        "n": "03",
+        "title": "River landing and steps",
+        "body": "Hue’s digital tourism record depicts a river landing and steps. That does not confirm a boat service is operating or that the route is step-free."
+      }
+    ],
+    "visitKicker": "Visiting",
+    "visitCards": [
+      {
+        "kicker": "Visiting hours",
+        "title": "Confirm before visiting",
+        "body": "Google Maps showed closing at 17:30 when checked on 2026-10-30. This is a third-party snapshot, not a weekly schedule confirmed by the pagoda. Check again before travelling, especially around ceremonies, holidays or maintenance."
+      },
+      {
+        "kicker": "Admission",
+        "title": "Current tariff unverified",
+        "body": "No clearly pagoda-specific current admission notice was verified. Do not treat a tour, boat or parking price as temple admission; confirm each service and its access conditions separately."
+      },
+      {
+        "kicker": "Weather",
+        "title": "Plan for actual conditions",
+        "body": "This guide has no live weather feed. Check Vietnam’s official meteorological forecasts and warnings before travelling; rain, heat and slippery steps can affect a visit."
+      }
+    ],
+    "transportKicker": "Getting there",
+    "transportTitle": "Confirm the entrance and transport service",
+    "transportItems": [
+      {
+        "b": "By road:",
+        "text": "Use the pagoda’s name on the map and confirm the drop-off point and entrance. No fixed journey time, distance or traffic conditions are promised."
+      },
+      {
+        "b": "By river:",
+        "text": "The river landing appears in the digital tourism record; ask a provider about departures, prices, weather and accessibility. Do not assume daily operation."
+      }
+    ],
+    "parkingKicker": "Parking & conduct",
+    "parkingTitle": "Parking near the entrance",
+    "parkingBody": "Current parking locations, tariffs and availability were not verified. Ask your transport provider and follow on-site signs; do not block residents or worship access.",
+    "etiquetteTitle": "Conduct at a place of worship",
+    "etiquetteBody": "General courtesy guidance, rather than a verified temple rulebook: dress modestly, speak quietly and avoid interrupting worship. Ask before photographing people or restricted spaces. Follow signs and do not touch offerings or religious objects.",
+    "foodKicker": "Around Kim Long",
+    "foodTitle": "Food to seek after your visit",
+    "foods": [
+      {
+        "title": "Find an operating venue",
+        "body": "No particular branch or current restaurant hours were verified in this review; check directly before adding one to your itinerary."
+      },
+      {
+        "title": "Dietary needs",
+        "body": "For vegetarian food or allergies, ask about ingredients and preparation; proximity to a temple does not guarantee suitability."
+      }
+    ],
+    "nearbyKicker": "Nearby",
+    "nearbyTitle": "Separate destinations in a Hue itinerary",
+    "nearbyItems": [
+      {
+        "title": "Huế Imperial City",
+        "body": "A separate heritage destination; check its own tickets, hours and travel arrangements. It is not part of the pagoda compound."
+      },
+      {
+        "title": "Perfume River",
+        "body": "The pagoda’s riverside setting does not guarantee an operating boat tour or an open continuous riverbank path."
+      }
+    ],
+    "reviewsKicker": "Reviews from Google Maps",
+    "faqTitle": "Frequently asked questions",
+    "reviewsTitle": "20,388 reviews on Maps",
+    "reviewsBody": "Manual Google Maps snapshot dated 2026-10-30: 4.6/5 and 20,388 reviews. It does not update automatically; these are not reviews collected here.",
+    "reviewsCta": "See all reviews on Google Maps ↗",
+    "faqs": [
+      [
+        "Where is the pagoda?",
+        "Maps lists Kim Long, Huế as a place reference, not a verified postal address or exact entrance. Search by the pagoda’s name and confirm the drop-off point with your transport provider."
+      ],
+      [
+        "What are the opening hours?",
+        "Google Maps showed closing at 17:30 when checked on 2026-10-30. This is a third-party snapshot, not a weekly schedule confirmed by the pagoda. Check again before travelling, especially around ceremonies, holidays or maintenance."
+      ],
+      [
+        "Is there an admission charge?",
+        "No clearly pagoda-specific current admission notice was verified. Do not treat a tour, boat or parking price as temple admission; confirm each service and its access conditions separately."
+      ],
+      [
+        "Does the tower date to 1601?",
+        "Official tourism sources date the pagoda’s founding to 1601 and associate it with Nguyễn Hoàng. The seven-tier, 21 m Phước Duyên Tower is a later structure; the visible tower should not be dated to 1601."
+      ],
+      [
+        "Is the route step-free?",
+        "Maps marked an accessible entrance on 2026-10-30. This does not establish step-free access to every stairway, courtyard, worship hall or toilet; confirm the route appropriate to your needs."
+      ],
+      [
+        "How should visitors behave?",
+        "General courtesy guidance, rather than a verified temple rulebook: dress modestly, speak quietly and avoid interrupting worship. Ask before photographing people or restricted spaces. Follow signs and do not touch offerings or religious objects."
+      ],
+      [
+        "Does the rating update automatically?",
+        "Manual Google Maps snapshot dated 2026-10-30: 4.6/5 and 20,388 reviews. It does not update automatically; these are not reviews collected here."
+      ]
+    ],
+    "sourcesKicker": "Sources",
+    "sourcesTitle": "Reviews & references",
+    "sourcesItems": [
+      "<a class=\"underline\" href=\"https://visithue.vn/ghe-tham-nhung-ngoi-chua-co-kinh-noi-tieng-o-hue/?pid=MjI5NDF8Y3NkbGRs0\">Visit Hue — location, tower and historical setting</a>",
+      "<a class=\"underline\" href=\"https://vietnam.travel/de/plan-your-trip/recommended-trip/heritage-sites-vietnam/\">Vietnam Tourism — riverside setting and founding date</a>",
+      "<a class=\"underline\" href=\"https://csdlsdl.hue.gov.vn/dulichso/chuathienmu.htm\">Huế — digital tourism record of the compound</a>",
+      "<a class=\"underline\" href=\"https://nchmf.gov.vn/\">Vietnam meteorological centre: forecasts and warnings</a>"
+    ],
+    "footerText": "Sources and manual snapshot reviewed on 2026-10-30.",
+    "footerDisclaimer": "An independent, unofficial, nonprofit tourism and educational guide; it does not represent the pagoda, government, heritage authority or Google.",
+    "nearbyNote": ""
+  }
 };
-
-const en: Guide = {
-  metaTitle: 'Thien Mu Pagoda (Chùa Thiên Mụ) — Hue, Vietnam | History, Directions & Reviews',
-  metaDescription:
-    'Visitor guide to Thien Mu Pagoda (Chùa Thiên Mụ) in Kim Long, Hue: map location, opening hours, free entry, the seven-tier Phước Duyên Tower, near the Imperial City of Huế and Perfume River, plus Google Maps reviews.',
-  ogTitle: 'Thien Mu Pagoda — Hue Travel Guide',
-  ogDescription:
-    'Independent visitor guide to Thien Mu Pagoda (Chùa Thiên Mụ) in Huế, Thừa Thiên Huế, Vietnam: location, hours, reviews and itinerary tips.',
-
-  heroKicker: 'Kim Long · Huế · Vietnam',
-  heroTitle: 'Thien Mu Pagoda',
-  heroSub:
-    'A quiet pause on Hà Khê hill — where the seven-tier Phước Duyên Tower mirrors into the Perfume River.',
-  heroRating: '★ 4.6 · 20,248 reviews',
-  heroFree: 'Free entry',
-  heroHeritage: 'Part of the Hue Monument Complex (UNESCO)',
-  heroMapsNote: `Ratings synced from Google Maps user reviews · Sep 2026 · See all on Google Maps ↗`,
-
-  introKicker: 'The spirit of Huế',
-  introTitle: 'From 1601 to the symbol of Phước Duyên',
-  introBody:
-    'The pagoda was first founded under Lord Nguyễn Hoàng. UNESCO recognizes Thiên Mụ as part of the Hue Monument Complex; the seven-tier Phước Duyên Tower was built under the Thiệu Trị reign in the 19th century. The temple grounds rise from the riverbank through successive courtyards, gates, worship halls and gardens — a route best explored slowly.',
-  quickInfoTitle: 'Quick info',
-  quickInfo: [
-    { label: 'Address', value: 'Kim Long, Huế 532761' },
-    { label: 'Suggested hours', value: '08:00–18:00' },
-    { label: 'Entry fee', value: 'Free' },
-    { label: 'Plus Code', value: 'FG3V+7W Kim Long' }
-  ],
-
-  aboutKicker: 'Visitor Guide',
-  aboutTitle: 'About Thien Mu Pagoda',
-  aboutBody1:
-    'Welcome to <strong>Chùa Thiên Mụ</strong>, widely known as <strong>Thien Mu Pagoda</strong>. Located in the heart of <strong>Huế</strong>, <strong>Thừa Thiên Huế</strong>, <strong>Vietnam</strong>, this is a leading spiritual and heritage landmark on the Perfume River, easy to combine with a central-Vietnam itinerary.',
-  aboutBreadcrumb: 'Chùa Thiên Mụ → Huế → Thừa Thiên Huế → Vietnam',
-  aboutBody2:
-    'When visiting <strong>Chùa Thiên Mụ</strong>, travellers can easily add nearby heritage sites such as the <strong>Imperial City of Huế</strong> and the <strong>Perfume River</strong> to the same day.',
-  aboutQuickTitle: 'Quick facts',
-  aboutQuick: [
-    { label: 'Attraction', value: 'Thien Mu Pagoda' },
-    { label: 'City', value: 'Huế' },
-    { label: 'Province', value: 'Thừa Thiên Huế' },
-    { label: 'Country', value: 'Vietnam' }
-  ],
-  aboutGovt: `For official regional tourism information, visit the ${govtLink('Vietnam National Authority of Tourism ↗')}.`,
-
-  spacesKicker: 'A walk through the grounds',
-  spacesTitle: 'Spaces worth pausing at',
-  spaces: [
-    {
-      n: '01',
-      title: 'Phước Duyên Tower',
-      body: 'The pagoda’s most prominent symbol — seven tiers, built under the Thiệu Trị reign.'
-    },
-    {
-      n: '02',
-      title: 'Tam Quan Gate & Đại Hùng Hall',
-      body: 'The main ceremonial axis; keep your voice low and follow the rules before entering the inner hall.'
-    },
-    {
-      n: '03',
-      title: 'Temple garden & Perfume River',
-      body: 'A calm stretch behind the main structures, good for a rest before heading down to the river pier.'
-    }
-  ],
-
-  visitKicker: 'Visiting',
-  visitCards: [
-    {
-      kicker: 'Tickets / cost',
-      title: 'Free to visit',
-      body: 'No entry fee to the temple grounds per current travel sources. Separate costs such as parking, Perfume River boats, offerings or guides are personal and may vary.'
-    },
-    {
-      kicker: 'Timing',
-      title: 'Early morning or late afternoon',
-      body: 'Spring in Huế is usually the most pleasant. Mornings are calm; late afternoons give beautiful light by the river. The rainy season is long, so check the forecast before going.'
-    },
-    {
-      kicker: 'Duration',
-      title: 'About 60–90 minutes',
-      body: 'Enough to cover the main route without rushing. Allow extra time if you add a boat trip, photos or a ceremony.'
-    }
-  ],
-
-  transportKicker: 'Getting there',
-  transportTitle: 'Along the riverbank, or arrive by boat',
-  transportItems: [
-    {
-      b: 'Motorbike / car:',
-      text: 'from central Huế head toward Kim Long – Nguyễn Phúc Nguyên. The road is easy; distance is a few kilometres depending on the starting point.'
-    },
-    {
-      b: 'Bicycle:',
-      text: 'good if the weather is cool; the riverside route invites a slow pace.'
-    },
-    {
-      b: 'Dragon boat:',
-      text: 'boats on the Perfume River connect the city centre with the pier near the pagoda; ask for departure times and price on the day.'
-    },
-    {
-      b: 'Taxi / ride-hailing:',
-      text: 'convenient for small groups and when it rains.'
-    }
-  ],
-
-  parkingKicker: 'Parking & conduct',
-  parkingTitle: 'Parking near the entrance',
-  parkingBody:
-    'There are attendants near the pagoda for visitor vehicles. Fees may vary by vehicle type and time; check the posted price board before leaving your vehicle. Avoid blocking local access paths and the boat pier.',
-  etiquetteTitle: 'Conduct at a place of worship',
-  etiquetteBody:
-    'Cover shoulders and knees, avoid posed shots in front of the altars, limit flash, and follow signage. When a ceremony is in progress, give priority to worshippers.',
-
-  foodKicker: 'Around Kim Long',
-  foodTitle: 'Food to seek after your visit',
-  foods: [
-    { title: 'Bún bò Huế', body: 'A rich, lemongrass-scented broth; good for breakfast or lunch.' },
-    { title: 'Bánh bèo · nậm · lọc', body: 'Huế’s signature small cakes — easy to order several to share.' },
-    { title: 'Vegetarian cuisine', body: 'Fits the spirit of a temple visit; Huế has a rich vegetarian tradition.' },
-    { title: 'Chè Huế', body: 'A light finish after a walk through the temple grounds.' }
-  ],
-
-  nearbyKicker: 'Nearby',
-  nearbyTitle: 'A very “Huế” day out',
-  nearbyItems: [
-    { title: 'Imperial City of Huế', body: 'The Nguyen-dynasty citadel core, easy to pair before or after Thiên Mụ.' },
-    { title: 'Huế Temple of Literature', body: 'On the same north-west heritage corridor, near the riverside route.' },
-    { title: 'Hổ Quyền & Elephant Arena', body: 'A quieter complex that adds context on Nguyen court ritual and history.' },
-    { title: 'Tomb of Tự Đức', body: 'A celebrated tomb complex south-west of the city; allow separate time for a slow visit.' }
-  ],
-
-  reviewsKicker: 'Reviews from Google Maps',
-  faqTitle: 'Frequently asked questions',
-  reviewsTitle: '4.6 / 5 · 20,248 reviews',
-  reviewsBody:
-    'Synced from Google Maps user reviews, sync time: Sep 2026. Copyright belongs to the original authors and Google Maps.',
-  reviewsCta: 'See all reviews on Google Maps ↗',
-
-  faqs: [
-    [
-      'Is Thien Mu Pagoda free to visit?',
-      'Yes, entry to the temple grounds is free. Separate costs may apply for parking, boat trips on the Perfume River, or personal services.'
-    ],
-    [
-      'How long should I spend there?',
-      'About 60–90 minutes is right to walk slowly through the Phước Duyên Tower, Tam Quan Gate, Đại Hùng Hall, the garden and the riverbank.'
-    ],
-    [
-      'What should I wear?',
-      'Modest, respectful clothing — cover shoulders and knees, speak softly and follow the signs in the worship areas.'
-    ],
-    [
-      'When is the best time to go?',
-      'Cool, quiet mornings; late afternoons are lovely for the river and the slanting light on the tower.'
-    ],
-    [
-      'Can I arrive by boat?',
-      'Yes. Perfume River boat tours are a popular way to reach the pagoda; schedules and prices vary by operator.'
-    ],
-    [
-      'Chùa Thiên Mụ có thu vé không?',
-      'Không. Việc vào khuôn viên chùa được nhiều nguồn du lịch hiện hành ghi nhận là miễn phí; nên chuẩn bị chi phí riêng cho gửi xe, đi thuyền hoặc dịch vụ cá nhân.'
-    ],
-    [
-      'Thiên Mụ Pagoda ở đâu?',
-      'Chùa Thiên Mụ tọa lạc tại Kim Long, Huế, tỉnh Thừa Thiên Huế, Việt Nam, trên bờ bắc sông Hương.'
-    ],
-    [
-      'Giờ mở cửa thế nào?',
-      'Khuôn viên thường mở ban ngày, khoảng 08:00–18:00; giờ có thể thay đổi theo sự kiện tôn giáo và quản lý thực tế.'
-    ]
-  ],
-
-  sourcesKicker: 'Sources',
-  sourcesTitle: 'Reviews &amp; references',
-  sourcesItems: [
-    'Reviews · synced Sep 2026 — source: Google Maps user reviews (Google Maps). Copyright belongs to the original authors and Google Maps.',
-    `Google Maps: ${mapsLink('View Chùa Thiên Mụ on Google Maps ↗')}`,
-    `Official tourism: ${govtLink('Vietnam National Authority of Tourism ↗')}`
-  ],
-
-  footerText: 'Chùa Thiên Mụ · Kim Long, Huế',
-  footerDisclaimer:
-    'An independent visitor-information page; not the official website of Chùa Thiên Mụ or the heritage authority.'
-};
-
-export const guides: Record<Locale, Guide> = { vi, en };

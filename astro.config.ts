@@ -12,9 +12,10 @@ const site = (process.env.SITE_URL?.trim()) || 'https://www.thienmupagoda.com';
 export default defineConfig({
   site,
   output: 'server',
-  adapter: cloudflare(),
+  adapter: cloudflare({configPath:'./wrangler.jsonc'}),
   integrations: [
     sitemap({
+      filter:(url)=>!url.endsWith('/404')&&!url.endsWith('/404/'),
       i18n: {
         defaultLocale: 'vi',
         locales: { vi: 'vi', en: 'en' }
