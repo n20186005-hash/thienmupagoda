@@ -19,4 +19,4 @@ export const ATTRACTION = {
   rating: { value: '4.6', count: '20388' }
 } as const;
 
-export const HERO_IMAGE='/images/social-diagram.png';
+export const HERO_IMAGE='/images/thien-mu-pagoda-real.jpg';

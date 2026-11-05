@@ -1,4 +1,5 @@
 @import "tailwindcss";
+.hero-photo{background-image:linear-gradient(90deg,rgba(15,21,17,.95),rgba(15,21,17,.45)),url('/images/thien-mu-pagoda-real.jpg')!important}
 
 :root { color-scheme: light; --ink:#1f241d; --jade:#294d3a; --cream:#f5efe2; --gold:#b78a43; --red:#7f2f2a; }
 html { scroll-behavior:smooth; background:var(--cream); }
