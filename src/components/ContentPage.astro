@@ -1,0 +1,216 @@
+﻿---
+import '../styles/global.css';
+import { ATTRACTION, HERO_IMAGE, GA_ID } from '../data/site';
+import { localeMeta, pagePath, pageHreflang, type Locale } from '../i18n';
+import { getPageDoc } from '../content/pages';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+
+interface Props { locale: Locale; path: string; }
+const { locale, path } = Astro.props;
+const doc = getPageDoc(locale, path);
+if (!doc) throw new Error(`Content page missing: ${locale}/${path}`);
+
+const meta = localeMeta[locale];
+const site = Astro.site ?? new URL('https://www.thienmupagoda.com/');
+const root = site.toString().replace(/\/$/, '');
+const canonical = root + pagePath(locale, path);
+const alt = pageHreflang(root, path);
+
+const rootUrl = root;
+const entityId = `${root}/#attraction`;
+const heroImage = doc.heroImage ?? HERO_IMAGE;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical + '#webpage',
+  url: canonical,
+  name: doc.metaTitle,
+  description: doc.metaDescription,
+  inLanguage: locale,
+  about: { '@type': 'BuddhistTemple', '@id': entityId, name: ATTRACTION.name, address: { '@type': 'PostalAddress', addressLocality: 'Huế', addressCountry: 'VN' } }
+};
+
+const crumbs = doc.breadcrumb.split('→').map((s) => s.trim());
+const homeHref = pagePath(locale);
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: crumbs[0], item: root + pagePath(locale) },
+    { '@type': 'ListItem', position: 2, name: crumbs[crumbs.length - 1], item: canonical }
+  ]
+};
+
+const faqLd = doc.faqs
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: doc.faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
+    }
+  : null;
+---
+<!doctype html>
+<html lang={meta.htmlLang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{doc.metaTitle}</title>
+  <meta name="description" content={doc.metaDescription} />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content={doc.ogTitle} />
+  <meta property="og:description" content={doc.ogDescription} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:locale" content={meta.ogLocale} />
+  <meta property="og:image" content={rootUrl + heroImage} />
+  <meta property="og:image:alt" content="Photograph of Thiên Mụ Pagoda in Huế" />
+  <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={doc.metaTitle}/><meta name="twitter:description" content={doc.ogDescription}/><meta name="twitter:image" content={rootUrl + heroImage}/><meta name="twitter:image:alt" content="Photograph of Thiên Mụ Pagoda in Huế"/>
+  <meta name="theme-color" content="#294d3a" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" />
+  <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" sizes="180x180" />
+  {alt.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+  {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd)}></script>}
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)}></script>
+  <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+  <script is:inline>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HXM22WWPKP');</script>
+</head>
+<body>
+  <SiteHeader locale={locale} path={path} />
+
+  <main id="top">
+    <section class="content-hero relative min-h-[58vh] text-white" style={heroImage ? `background-image:linear-gradient(90deg,rgba(15,21,17,.95),rgba(15,21,17,.45)),url('${heroImage}')` : undefined}>
+      <div class="absolute inset-0 pattern opacity-20"></div>
+      <div class="relative mx-auto flex min-h-[58vh] max-w-7xl items-end px-5 pb-14 pt-28">
+        <div class="max-w-3xl">
+          <p class="kicker !text-[#f4d7a5]">{doc.hero.kicker}</p>
+          <h1 class="mt-4 text-4xl leading-[1.05] font-semibold md:text-6xl">{doc.hero.title}</h1>
+          <p class="mt-5 max-w-2xl text-lg text-white/86 md:text-2xl">{doc.hero.sub}</p>
+        </div>
+      </div>
+    </section>
+
+    <nav class="mx-auto max-w-7xl px-5 py-4 text-sm text-black/55" aria-label="breadcrumb">
+      <a class="underline" href={homeHref}>{crumbs[0]}</a>
+      <span class="px-2">→</span>
+      <span>{crumbs[crumbs.length - 1]}</span>
+    </nav>
+
+    {doc.sections.map((s, idx) => (
+      <Fragment key={idx}>
+        {s.type === 'lead' && (
+          <section class="mx-auto max-w-3xl px-5 py-10 md:py-14">
+            <p class="text-xl leading-9 text-black/75 md:text-2xl">{s.body}</p>
+          </section>
+        )}
+        {s.type === 'prose' && (
+          <section class="mx-auto max-w-3xl px-5 py-10 md:py-14">
+            {s.title && <h2 class="mt-3 text-3xl md:text-4xl">{s.title}</h2>}
+            <p class="mt-5 text-lg leading-8 text-black/70" set:html={s.html}></p>
+          </section>
+        )}
+        {s.type === 'cards' && (
+          <section class="mx-auto max-w-7xl px-5 py-10 md:py-14">
+            {s.kicker && <p class="kicker">{s.kicker}</p>}
+            {s.title && <h2 class="mt-3 text-3xl md:text-4xl">{s.title}</h2>}
+            <div class="mt-7 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {s.items.map((it) => (
+                <article class="card rounded-3xl p-7">
+                  <h3 class="text-xl font-semibold">{it.title}</h3>
+                  <p class="mt-3 leading-7 text-black/65">{it.body}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+        {s.type === 'info' && (
+          <section class="mx-auto max-w-3xl px-5 py-10 md:py-14">
+            <div class="card rounded-[2rem] p-7">
+              {s.title && <p class="kicker">{s.title}</p>}
+              <dl class="mt-5 space-y-4 text-sm">
+                {s.rows.map((r) => (
+                  <div class="flex justify-between gap-4 border-b border-black/10 pb-3">
+                    <dt>{r.label}</dt>
+                    <dd class="text-right font-semibold">{r.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </section>
+        )}
+        {s.type === 'steps' && (
+          <section class="mx-auto max-w-3xl px-5 py-10 md:py-14">
+            {s.kicker && <p class="kicker">{s.kicker}</p>}
+            {s.title && <h2 class="mt-3 text-3xl md:text-4xl">{s.title}</h2>}
+            <ol class="mt-7 space-y-5">
+              {s.items.map((it, i) => (
+                <li class="card rounded-2xl p-6">
+                  <h3 class="text-lg font-semibold">{i + 1}. {it.title}</h3>
+                  <p class="mt-2 leading-7 text-black/65">{it.body}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+        {s.type === 'callout' && (
+          <section class="mx-auto max-w-3xl px-5 py-6">
+            <div class:list={[ "rounded-[1.5rem] p-7 border", s.tone === 'warn' ? "bg-[#fbeae8] border-[#7f2f2a]/30 text-[#5a201c]" : "bg-[#eef3ee] border-[#294d3a]/25 text-[#1f3328]" ]}>
+              {s.title && <p class="font-semibold text-base">{s.title}</p>}
+              <p class="mt-2 leading-7">{s.body}</p>
+            </div>
+          </section>
+        )}
+        {s.type === 'map' && (
+          <section class="bg-[#7f2f2a] text-[#fff6e8]">
+            <div class="mx-auto max-w-7xl px-5 py-12 md:py-16">
+              <div class="rounded-[2rem] border border-white/30 p-7">
+                <h2 class="text-2xl">{locale === 'vi' ? 'Bản đồ tham khảo' : 'Map reference'}</h2>
+                {s.note && <p class="mt-4 leading-7 text-white/78">{s.note}</p>}
+                <a class="mt-6 inline-block rounded-full bg-[#f5efe2] px-6 py-3 font-semibold text-[#16231c]" href={ATTRACTION.mapsUrl} target="_blank" rel="noopener noreferrer">{locale === 'vi' ? 'Mở Google Maps' : 'Open Google Maps'} ↗</a>
+              </div>
+            </div>
+          </section>
+        )}
+      </Fragment>
+    ))}
+
+    {doc.faqs && (
+      <section id="faq" class="bg-[#25392e] text-[#f7f0e4]">
+        <div class="mx-auto max-w-4xl px-5 py-16 md:py-24">
+          <p class="kicker !text-[#d7b477]">FAQ</p>
+          <h2 class="mt-3 text-4xl md:text-5xl">{locale === 'vi' ? 'Câu hỏi thường gặp' : 'Frequently asked questions'}</h2>
+          <div class="mt-8 divide-y divide-white/15">
+            {doc.faqs.map(([q, a]) => (
+              <details class="py-5 group">
+                <summary class="cursor-pointer list-none text-xl font-semibold">{q}<span class="float-right text-white/50 group-open:rotate-45">＋</span></summary>
+                <p class="mt-3 max-w-3xl leading-7 text-white/65">{a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section id="sources" class="mx-auto max-w-7xl px-5 py-16 md:py-20">
+      <p class="kicker">{locale === 'vi' ? 'Nguồn tham khảo' : 'Sources'}</p>
+      <h2 class="mt-3 text-3xl md:text-4xl">{locale === 'vi' ? 'Tài liệu & tham khảo' : 'References & sources'}</h2>
+      <ul class="mt-6 space-y-3 text-sm text-black/70">
+        {doc.sources?.map((s) => <li set:html={s}></li>)}
+      </ul>
+      {doc.updated && <p class="mt-6 text-xs text-black/50">{locale === 'vi' ? 'Cập nhật' : 'Updated'}: {doc.updated}</p>}
+    </section>
+  </main>
+
+  <SiteFooter locale={locale} />
+
+  <script is:inline>
+    if ('serviceWorker' in navigator) navigator.serviceWorker.getRegistration('/').then(r=>r?.update()).catch(()=>{});
+  </script>
+</body>
+</html>

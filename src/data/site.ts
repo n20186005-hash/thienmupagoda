@@ -16,7 +16,7 @@ export const ATTRACTION = {
   govtUrl: 'https://vietnam.travel/',
   nearby1: 'Imperial City of Huế',
   nearby2: 'Perfume River',
-  rating: { value: '4.6', count: '20388' }
+  rating: { value: '4.6', count: '20440' }
 } as const;
 
 export const HERO_IMAGE='/images/thien-mu-pagoda-real.jpg';

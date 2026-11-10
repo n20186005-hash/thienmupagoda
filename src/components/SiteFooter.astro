@@ -1,0 +1,27 @@
+﻿---
+import { pageNotes } from '../content/notes';
+import { guides } from '../content/guide';
+import type { Locale } from '../i18n';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const g = guides[locale];
+const note = pageNotes[locale];
+const homeHref = locale === 'vi' ? '/' : '/en/';
+---
+<footer class="bg-[#16231c] text-white/65">
+  <div class="mx-auto max-w-7xl px-5 py-10 text-sm">
+    <div class="flex flex-col justify-between gap-5 md:flex-row">
+      <p>{g.footerText}</p>
+      <p class="max-w-xl md:text-right">{g.footerDisclaimer}</p>
+    </div>
+    <nav class="mt-6 flex flex-wrap gap-4" aria-label="footer">
+      <a class="underline" href={homeHref}>{locale === 'vi' ? 'Trang chủ' : 'Home'}</a>
+      <a class="underline" href={locale === 'vi' ? '/en/' : '/'}>{locale === 'vi' ? 'English' : 'Tiếng Việt'}</a>
+    </nav>
+    <section id="privacy" class="mt-8 max-w-4xl">
+      <h2 class="text-2xl text-white">{locale === 'vi' ? 'Quyền riêng tư và phân tích' : 'Privacy and analytics'}</h2>
+      <p class="mt-4 leading-7">{note.privacy}</p>
+      <p class="mt-4"><a href="https://policies.google.com/privacy">Google privacy</a> · <a href="https://tools.google.com/dlpage/gaoptout">Google opt-out</a> · <a href="https://developers.cloudflare.com/web-analytics/data-metrics/">Cloudflare Web Analytics</a> · <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare privacy</a></p>
+    </section>
+  </div>
+</footer>

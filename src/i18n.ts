@@ -12,8 +12,25 @@ export const localeMeta: Record<Locale, { htmlLang: string; ogLocale: string }> 
 };
 
 // Đường dẫn trang theo ngôn ngữ (dùng cho chuyển ngữ và hreflang).
-export function pagePath(locale: Locale): string {
-  return locale === 'vi' ? '/' : '/en/';
+// Không truyền path → trả về trang chủ. Truyền path (vd "entrance-fee"
+// hoặc "nearby/hue-imperial-city") → trả về đường dẫn tuyệt đối trong ngôn ngữ đó.
+export function pagePath(locale: Locale, path?: string): string {
+  const base = locale === 'vi' ? '/' : '/en/';
+  if (!path) return base;
+  return `${base}${path}/`;
+}
+
+// hreflang cho một trang nội dung phụ (không phải trang chủ).
+// Chuẩn hóa: vi ở gốc, en ở /en/. x-default trỏ về bản tiếng Việt.
+export function pageHreflang(site: string, path: string): { hreflang: string; href: string }[] {
+  const base = site.replace(/\/$/, '');
+  const vi = `${base}/${path}/`;
+  const en = `${base}/en/${path}/`;
+  return [
+    { hreflang: 'vi', href: vi },
+    { hreflang: 'en', href: en },
+    { hreflang: 'x-default', href: vi }
+  ];
 }
 
 // Trả về map { mã-hreflang: url-tuyệt-đối } cho một site gốc đã chuẩn hóa.

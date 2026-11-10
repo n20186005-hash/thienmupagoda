@@ -1,0 +1,27 @@
+﻿---
+import { pagePath, type Locale } from '../i18n';
+interface Props { locale: Locale; path?: string; }
+const { locale, path } = Astro.props;
+const otherLocale: Locale = locale === 'vi' ? 'en' : 'vi';
+const switchHref = pagePath(otherLocale, path);
+const switchLabel = locale === 'vi' ? 'EN' : 'VI';
+const menuLabel = locale === 'vi' ? 'Mục lục' : 'Menu';
+const homeHref = pagePath(locale);
+const navItems = [
+  { href: homeHref, label: locale === 'vi' ? 'Trang chủ' : 'Home' },
+  { href: pagePath(locale, 'history'), label: locale === 'vi' ? 'Lịch sử' : 'History' },
+  { href: pagePath(locale, 'visitor-guide'), label: locale === 'vi' ? 'Tham quan' : 'Visit' },
+  { href: pagePath(locale, 'how-to-get-there'), label: locale === 'vi' ? 'Đường đi' : 'Getting there' },
+  { href: '#faq', label: 'FAQ' }
+];
+---
+<header class="sticky top-0 z-50 border-b border-black/10 bg-[#f5efe2]/92 backdrop-blur-xl">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3">
+    <a href={homeHref}><img src="/logo.svg" width="220" height="64" alt="Chùa Thiên Mụ" class="h-12 w-auto" /></a>
+    <nav class="hidden gap-6 xl:flex" aria-label={menuLabel}>
+      {navItems.map((n) => <a class="navlink" href={n.href}>{n.label}</a>)}
+    </nav>
+    <a class="rounded-full border border-black/15 px-3 py-1 text-xs font-semibold" href={switchHref} hreflang={otherLocale}>{switchLabel}</a>
+  </div>
+  <details class="mobile-menu xl:hidden"><summary>{menuLabel}</summary><nav aria-label={menuLabel}>{navItems.map((n) => <a href={n.href}>{n.label}</a>)}</nav></details>
+</header>

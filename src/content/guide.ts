@@ -77,17 +77,17 @@ export interface Guide {
 
 export const guides: Record<Locale, Guide> = {
   "vi": {
-    "metaTitle": "Chùa Thiên Mụ, Huế: lịch sử, giờ cần xác nhận và đường đi",
-    "metaDescription": "Chùa Thiên Mụ, còn gọi là Linh Mụ, nằm trên đồi Hà Khê bên sông Hương ở Huế. Đây là nơi sinh hoạt Phật giáo: hãy ưu tiên không gian thờ tự khi tham quan.",
-    "ogTitle": "Chùa Thiên Mụ, Huế: lịch sử, giờ cần xác nhận và đường đi",
-    "ogDescription": "Google Maps hiển thị đóng cửa lúc 17:30 khi kiểm tra ngày 2026-10-30. Đây chỉ là ảnh chụp thông tin của bên thứ ba, không phải lịch hằng tuần được nhà chùa xác nhận. Hãy hỏi lại trước khi đi, nhất là vào ngày lễ, khóa lễ hoặc bảo trì.",
+    "metaTitle": "Chùa Thiên Mụ Huế: vé, giờ mở cửa, đường đi & lịch sử (1601)",
+    "metaDescription": "Chùa Thiên Mụ (Linh Mụ) trên đồi Hà Khê, bên sông Hương, Huế. Thông tin vé (miễn phí theo tư liệu, giá hiện hành chưa xác minh), giờ mở cửa (ảnh chụp Maps 17:30), đường đi và lịch sử khởi dựng 1601. Hãy xác nhận trước khi đi.",
+    "ogTitle": "Chùa Thiên Mụ Huế: vé, giờ mở cửa, đường đi & lịch sử (1601)",
+    "ogDescription": "Google Maps hiển thị đóng cửa lúc 17:30 khi kiểm tra ngày 2026-11-10. Đây chỉ là ảnh chụp thông tin của bên thứ ba, không phải lịch hằng tuần được nhà chùa xác nhận. Hãy hỏi lại trước khi đi, nhất là vào ngày lễ, khóa lễ hoặc bảo trì.",
     "heroKicker": "Kim Long · Huế · Việt Nam",
     "heroTitle": "Chùa Thiên Mụ",
     "heroSub": "Chùa Thiên Mụ, còn gọi là Linh Mụ, nằm trên đồi Hà Khê bên sông Hương ở Huế. Đây là nơi sinh hoạt Phật giáo: hãy ưu tiên không gian thờ tự khi tham quan.",
-    "heroRating": "★ 4,6 · 20.388 đánh giá",
+    "heroRating": "★ 4,6 · 20.440 đánh giá",
     "heroFree": "Xác nhận điều kiện vào chùa",
     "heroHeritage": "Nơi sinh hoạt Phật giáo",
-    "heroMapsNote": "Ảnh chụp thủ công từ Google Maps ngày 2026-10-30: 4,6/5 và 20.388 đánh giá. Không tự động cập nhật; đây không phải đánh giá do trang này thu thập.",
+    "heroMapsNote": "Ảnh chụp thủ công từ Google Maps ngày 2026-11-10: 4,6/5 và 20.440 đánh giá. Không tự động cập nhật; đây không phải đánh giá do trang này thu thập.",
     "introKicker": "Cốt cách xứ Huế",
     "introTitle": "Từ năm 1601 đến biểu tượng Phước Duyên",
     "introBody": "Nguồn du lịch chính thức ghi nhận chùa được khởi dựng năm 1601, gắn với chúa Nguyễn Hoàng. Tháp Phước Duyên bảy tầng, cao 21 m, là công trình xây sau đó; không nên hiểu tháp hiện nay có từ năm 1601.",
@@ -99,7 +99,7 @@ export const guides: Record<Locale, Guide> = {
       },
       {
         "label": "Giờ hiển thị trên Maps",
-        "value": "2026-10-30 · 17:30"
+        "value": "2026-11-10 · 17:30"
       },
       {
         "label": "Phí hiện hành",
@@ -110,7 +110,7 @@ export const guides: Record<Locale, Guide> = {
     "aboutTitle": "Về Chùa Thiên Mụ",
     "aboutBody1": "Maps ghi Kim Long, Huế; đây là tham chiếu khu vực, không phải địa chỉ bưu chính hay cổng vào chính xác đã xác minh. Tìm theo tên chùa và xác nhận điểm đến với đơn vị vận chuyển.",
     "aboutBreadcrumb": "Chùa Thiên Mụ → Huế → Việt Nam",
-    "aboutBody2": "Maps đánh dấu có lối vào hỗ trợ tiếp cận ngày 2026-10-30. Điều này không xác nhận mọi bậc thang, sân, điện thờ hay nhà vệ sinh đều không có bậc; hỏi rõ tuyến đường phù hợp nhu cầu của bạn.",
+    "aboutBody2": "Maps đánh dấu có lối vào hỗ trợ tiếp cận ngày 2026-11-10. Điều này không xác nhận mọi bậc thang, sân, điện thờ hay nhà vệ sinh đều không có bậc; hỏi rõ tuyến đường phù hợp nhu cầu của bạn.",
     "aboutQuickTitle": "Thông tin tóm tắt",
     "aboutQuick": [
       {
@@ -151,7 +151,7 @@ export const guides: Record<Locale, Guide> = {
       {
         "kicker": "Giờ tham quan",
         "title": "Hỏi lại trước khi đi",
-        "body": "Google Maps hiển thị đóng cửa lúc 17:30 khi kiểm tra ngày 2026-10-30. Đây chỉ là ảnh chụp thông tin của bên thứ ba, không phải lịch hằng tuần được nhà chùa xác nhận. Hãy hỏi lại trước khi đi, nhất là vào ngày lễ, khóa lễ hoặc bảo trì."
+        "body": "Google Maps hiển thị đóng cửa lúc 17:30 khi kiểm tra ngày 2026-11-10. Đây chỉ là ảnh chụp thông tin của bên thứ ba, không phải lịch hằng tuần được nhà chùa xác nhận. Hãy hỏi lại trước khi đi, nhất là vào ngày lễ, khóa lễ hoặc bảo trì."
       },
       {
         "kicker": "Chi phí",
@@ -208,8 +208,8 @@ export const guides: Record<Locale, Guide> = {
     "nearbyNote": "",
     "reviewsKicker": "Đánh giá từ Google Maps",
     "faqTitle": "Câu hỏi thường gặp",
-    "reviewsTitle": "20.388 đánh giá trên Maps",
-    "reviewsBody": "Ảnh chụp thủ công từ Google Maps ngày 2026-10-30: 4,6/5 và 20.388 đánh giá. Không tự động cập nhật; đây không phải đánh giá do trang này thu thập.",
+    "reviewsTitle": "20.440 đánh giá trên Maps",
+    "reviewsBody": "Ảnh chụp thủ công từ Google Maps ngày 2026-11-10: 4,6/5 và 20.440 đánh giá. Không tự động cập nhật; đây không phải đánh giá do trang này thu thập.",
     "reviewsCta": "Xem tất cả đánh giá trên Google Maps ↗",
     "faqs": [
       [
@@ -218,7 +218,7 @@ export const guides: Record<Locale, Guide> = {
       ],
       [
         "Giờ mở cửa là bao nhiêu?",
-        "Google Maps hiển thị đóng cửa lúc 17:30 khi kiểm tra ngày 2026-10-30. Đây chỉ là ảnh chụp thông tin của bên thứ ba, không phải lịch hằng tuần được nhà chùa xác nhận. Hãy hỏi lại trước khi đi, nhất là vào ngày lễ, khóa lễ hoặc bảo trì."
+        "Google Maps hiển thị đóng cửa lúc 17:30 khi kiểm tra ngày 2026-11-10. Đây chỉ là ảnh chụp thông tin của bên thứ ba, không phải lịch hằng tuần được nhà chùa xác nhận. Hãy hỏi lại trước khi đi, nhất là vào ngày lễ, khóa lễ hoặc bảo trì."
       ],
       [
         "Có phải mua vé không?",
@@ -230,7 +230,7 @@ export const guides: Record<Locale, Guide> = {
       ],
       [
         "Có tuyến không bậc không?",
-        "Maps đánh dấu có lối vào hỗ trợ tiếp cận ngày 2026-10-30. Điều này không xác nhận mọi bậc thang, sân, điện thờ hay nhà vệ sinh đều không có bậc; hỏi rõ tuyến đường phù hợp nhu cầu của bạn."
+        "Maps đánh dấu có lối vào hỗ trợ tiếp cận ngày 2026-11-10. Điều này không xác nhận mọi bậc thang, sân, điện thờ hay nhà vệ sinh đều không có bậc; hỏi rõ tuyến đường phù hợp nhu cầu của bạn."
       ],
       [
         "Nên ứng xử thế nào?",
@@ -238,7 +238,7 @@ export const guides: Record<Locale, Guide> = {
       ],
       [
         "Đánh giá có tự động cập nhật không?",
-        "Ảnh chụp thủ công từ Google Maps ngày 2026-10-30: 4,6/5 và 20.388 đánh giá. Không tự động cập nhật; đây không phải đánh giá do trang này thu thập."
+        "Ảnh chụp thủ công từ Google Maps ngày 2026-11-10: 4,6/5 và 20.440 đánh giá. Không tự động cập nhật; đây không phải đánh giá do trang này thu thập."
       ]
     ],
     "sourcesKicker": "Nguồn tham khảo",
@@ -249,21 +249,21 @@ export const guides: Record<Locale, Guide> = {
       "<a class=\"underline\" href=\"https://csdlsdl.hue.gov.vn/dulichso/chuathienmu.htm\">Huế — tư liệu du lịch số của khuôn viên</a>",
       "<a class=\"underline\" href=\"https://nchmf.gov.vn/\">Cơ quan khí tượng Việt Nam: dự báo và cảnh báo</a>"
     ],
-    "footerText": "Nguồn và ảnh chụp thông tin được đối chiếu ngày 2026-10-30.",
+    "footerText": "Nguồn và ảnh chụp thông tin được đối chiếu ngày 2026-11-10.",
     "footerDisclaimer": "Cẩm nang du lịch và phổ biến kiến thức độc lập, phi lợi nhuận, không chính thức; không đại diện nhà chùa, chính quyền, cơ quan di sản hay Google."
   },
   "en": {
-    "metaTitle": "Thien Mu Pagoda, Hue: history, hours to confirm and access",
-    "metaDescription": "Thiên Mụ, also called Linh Mụ, stands on Hà Khê Hill beside the Perfume River in Huế. It remains a Buddhist religious setting: give worship and ceremonies priority during a visit.",
-    "ogTitle": "Thien Mu Pagoda, Hue: history, hours to confirm and access",
-    "ogDescription": "Google Maps showed closing at 17:30 when checked on 2026-10-30. This is a third-party snapshot, not a weekly schedule confirmed by the pagoda. Check again before travelling, especially around ceremonies, holidays or maintenance.",
+    "metaTitle": "Thien Mu Pagoda Hue: tickets, opening hours, how to get there & history (1601)",
+    "metaDescription": "Thiên Mụ (Linh Mụ) on Hà Khê Hill by the Perfume River, Huế. Admission (often described as free, but no verified current tariff), opening hours (Maps snapshot 17:30), directions and founding in 1601. Confirm before visiting.",
+    "ogTitle": "Thien Mu Pagoda Hue: tickets, opening hours, how to get there & history (1601)",
+    "ogDescription": "Google Maps showed closing at 17:30 when checked on 2026-11-10. This is a third-party snapshot, not a weekly schedule confirmed by the pagoda. Check again before travelling, especially around ceremonies, holidays or maintenance.",
     "heroKicker": "Kim Long · Huế · Vietnam",
     "heroTitle": "Thien Mu Pagoda",
     "heroSub": "Thiên Mụ, also called Linh Mụ, stands on Hà Khê Hill beside the Perfume River in Huế. It remains a Buddhist religious setting: give worship and ceremonies priority during a visit.",
-    "heroRating": "★ 4.6 · 20,388 reviews",
+    "heroRating": "★ 4.6 · 20,440 reviews",
     "heroFree": "Confirm admission conditions",
     "heroHeritage": "A Buddhist religious place",
-    "heroMapsNote": "Manual Google Maps snapshot dated 2026-10-30: 4.6/5 and 20,388 reviews. It does not update automatically; these are not reviews collected here.",
+    "heroMapsNote": "Manual Google Maps snapshot dated 2026-11-10: 4.6/5 and 20,440 reviews. It does not update automatically; these are not reviews collected here.",
     "introKicker": "The spirit of Huế",
     "introTitle": "From 1601 to the symbol of Phước Duyên",
     "introBody": "Official tourism sources date the pagoda’s founding to 1601 and associate it with Nguyễn Hoàng. The seven-tier, 21 m Phước Duyên Tower is a later structure; the visible tower should not be dated to 1601.",
@@ -275,7 +275,7 @@ export const guides: Record<Locale, Guide> = {
       },
       {
         "label": "Maps closing snapshot",
-        "value": "2026-10-30 · 17:30"
+        "value": "2026-11-10 · 17:30"
       },
       {
         "label": "Current admission",
@@ -286,7 +286,7 @@ export const guides: Record<Locale, Guide> = {
     "aboutTitle": "About Thien Mu Pagoda",
     "aboutBody1": "Maps lists Kim Long, Huế as a place reference, not a verified postal address or exact entrance. Search by the pagoda’s name and confirm the drop-off point with your transport provider.",
     "aboutBreadcrumb": "Thien Mu Pagoda → Huế → Vietnam",
-    "aboutBody2": "Maps marked an accessible entrance on 2026-10-30. This does not establish step-free access to every stairway, courtyard, worship hall or toilet; confirm the route appropriate to your needs.",
+    "aboutBody2": "Maps marked an accessible entrance on 2026-11-10. This does not establish step-free access to every stairway, courtyard, worship hall or toilet; confirm the route appropriate to your needs.",
     "aboutQuickTitle": "Quick facts",
     "aboutQuick": [
       {
@@ -327,7 +327,7 @@ export const guides: Record<Locale, Guide> = {
       {
         "kicker": "Visiting hours",
         "title": "Confirm before visiting",
-        "body": "Google Maps showed closing at 17:30 when checked on 2026-10-30. This is a third-party snapshot, not a weekly schedule confirmed by the pagoda. Check again before travelling, especially around ceremonies, holidays or maintenance."
+        "body": "Google Maps showed closing at 17:30 when checked on 2026-11-10. This is a third-party snapshot, not a weekly schedule confirmed by the pagoda. Check again before travelling, especially around ceremonies, holidays or maintenance."
       },
       {
         "kicker": "Admission",
@@ -383,8 +383,8 @@ export const guides: Record<Locale, Guide> = {
     ],
     "reviewsKicker": "Reviews from Google Maps",
     "faqTitle": "Frequently asked questions",
-    "reviewsTitle": "20,388 reviews on Maps",
-    "reviewsBody": "Manual Google Maps snapshot dated 2026-10-30: 4.6/5 and 20,388 reviews. It does not update automatically; these are not reviews collected here.",
+    "reviewsTitle": "20,440 reviews on Maps",
+    "reviewsBody": "Manual Google Maps snapshot dated 2026-11-10: 4.6/5 and 20,440 reviews. It does not update automatically; these are not reviews collected here.",
     "reviewsCta": "See all reviews on Google Maps ↗",
     "faqs": [
       [
@@ -393,7 +393,7 @@ export const guides: Record<Locale, Guide> = {
       ],
       [
         "What are the opening hours?",
-        "Google Maps showed closing at 17:30 when checked on 2026-10-30. This is a third-party snapshot, not a weekly schedule confirmed by the pagoda. Check again before travelling, especially around ceremonies, holidays or maintenance."
+        "Google Maps showed closing at 17:30 when checked on 2026-11-10. This is a third-party snapshot, not a weekly schedule confirmed by the pagoda. Check again before travelling, especially around ceremonies, holidays or maintenance."
       ],
       [
         "Is there an admission charge?",
@@ -405,7 +405,7 @@ export const guides: Record<Locale, Guide> = {
       ],
       [
         "Is the route step-free?",
-        "Maps marked an accessible entrance on 2026-10-30. This does not establish step-free access to every stairway, courtyard, worship hall or toilet; confirm the route appropriate to your needs."
+        "Maps marked an accessible entrance on 2026-11-10. This does not establish step-free access to every stairway, courtyard, worship hall or toilet; confirm the route appropriate to your needs."
       ],
       [
         "How should visitors behave?",
@@ -413,7 +413,7 @@ export const guides: Record<Locale, Guide> = {
       ],
       [
         "Does the rating update automatically?",
-        "Manual Google Maps snapshot dated 2026-10-30: 4.6/5 and 20,388 reviews. It does not update automatically; these are not reviews collected here."
+        "Manual Google Maps snapshot dated 2026-11-10: 4.6/5 and 20,440 reviews. It does not update automatically; these are not reviews collected here."
       ]
     ],
     "sourcesKicker": "Sources",
@@ -424,7 +424,7 @@ export const guides: Record<Locale, Guide> = {
       "<a class=\"underline\" href=\"https://csdlsdl.hue.gov.vn/dulichso/chuathienmu.htm\">Huế — digital tourism record of the compound</a>",
       "<a class=\"underline\" href=\"https://nchmf.gov.vn/\">Vietnam meteorological centre: forecasts and warnings</a>"
     ],
-    "footerText": "Sources and manual snapshot reviewed on 2026-10-30.",
+    "footerText": "Sources and manual snapshot reviewed on 2026-11-10.",
     "footerDisclaimer": "An independent, unofficial, nonprofit tourism and educational guide; it does not represent the pagoda, government, heritage authority or Google.",
     "nearbyNote": ""
   }
