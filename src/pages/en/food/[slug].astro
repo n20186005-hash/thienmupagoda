@@ -1,0 +1,6 @@
+---
+import ContentPage from '../../../components/ContentPage.astro';
+import { pageStaticPaths } from '../../../content/pages';
+export function getStaticPaths() { return pageStaticPaths('food'); }
+---
+<ContentPage locale="en" path={Astro.props.path} />

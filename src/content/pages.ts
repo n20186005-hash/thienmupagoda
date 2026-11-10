@@ -1,4 +1,5 @@
 ﻿import type { Locale } from '../i18n';
+import { extraPageDocs } from './pages-extra';
 
 export type PageSection =
   | { type: 'lead'; body: string }
@@ -25,9 +26,11 @@ export interface PageDoc {
 }
 
 export const pageGroups = {
-  top: ['entrance-fee', 'opening-hours', 'how-to-get-there', 'visitor-guide', 'phuoc-duyen-tower', 'history'],
-  nearby: ['hue-imperial-city'],
-  itineraries: ['perfume-river-boat-trip']
+  top: ['entrance-fee', 'opening-hours', 'how-to-get-there', 'visitor-guide', 'phuoc-duyen-tower', 'history', 'parking', 'best-time-to-visit-hue', 'dress-code', 'photography-tips', 'facilities-restrooms', 'accessibility', 'maps-navigation', 'founder-nguyen-hoang', 'nguyen-dynasty', 'pagoda-architecture', 'the-old-car', 'the-bell', 'legend-of-thien-mu', 'religious-significance'],
+  nearby: ['hue-imperial-city', 'tomb-of-tu-duc', 'tomb-of-khai-dinh', 'tomb-of-minh-mang', 'dong-ba-market', 'perfume-river'],
+  itineraries: ['perfume-river-boat-trip', 'half-day-hue', 'hue-2-day-itinerary', 'sunset-itinerary', 'hue-day-trip-from-da-nang'],
+  food: ['vegetarian-food-at-pagoda', 'hue-cuisine', 'coffee-by-perfume-river'],
+  stay: ['where-to-stay-in-hue', 'best-hotels-near-pagoda', 'is-thien-mu-worth-visiting', 'hue-travel-guide']
 } as const;
 
 export const pageDocs: Record<Locale, Record<string, PageDoc>> = {
@@ -680,6 +683,10 @@ export const pageDocs: Record<Locale, Record<string, PageDoc>> = {
     }
   }
 };
+
+for (const l of ['vi', 'en'] as Locale[]) {
+  Object.assign(pageDocs[l], extraPageDocs[l]);
+}
 
 export function getPageDoc(locale: Locale, path: string): PageDoc | undefined {
   return pageDocs[locale]?.[path];
